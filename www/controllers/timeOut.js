@@ -1,0 +1,3 @@
+.controller('TimeOutCtrl', function($scope) {
+
+});

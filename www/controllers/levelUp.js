@@ -1,0 +1,3 @@
+.controller('LevelUpCtrl', function($scope) {
+
+});

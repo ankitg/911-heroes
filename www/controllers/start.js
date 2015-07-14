@@ -1,0 +1,3 @@
+.controller('StartCtrl', function($scope) {
+
+});

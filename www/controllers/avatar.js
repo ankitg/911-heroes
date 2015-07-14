@@ -1,0 +1,3 @@
+.controller('AvatarCtrl', function($scope) {
+
+});

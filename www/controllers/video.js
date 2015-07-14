@@ -1,0 +1,3 @@
+.controller('VideoCtrl', function($scope) {
+
+});
