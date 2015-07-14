@@ -30,8 +30,8 @@ angular.module('starter', ['ionic'])
     abstract: true,
     views:  {
       '': {
-        templateUrl: 'views/main/layout.html',
-        controller: 'MainCtrl'
+        templateUrl: 'index.html',
+        // controller: 'MainCtrl'
       }
     }
   })
@@ -190,6 +190,6 @@ angular.module('starter', ['ionic'])
     }
   })
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/start');
+  $urlRouterProvider.otherwise('/login');
 
 });
