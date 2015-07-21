@@ -1,0 +1,3 @@
+.controller('MainCtrl', function($scope) {
+
+});
