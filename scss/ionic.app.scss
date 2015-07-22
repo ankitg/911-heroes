@@ -43,3 +43,44 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.app-background .pane {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b6daef+0,91d0f4+100 */
+	background: linear-gradient(to bottom, #b6daef 0%, #91d0f4 100%);
+}
+
+// Login View
+
+#login {
+
+	.login-container {
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.item-stacked-label input {
+		background-color: transparent;
+		border-bottom: 1px solid #8CACC0;
+	}
+
+	label.item {
+		border-style: none;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.login-footnote {
+		text-align: right;
+	}
+
+	i.asterisk {
+
+		&:before {
+			content: "*";
+		}
+
+		color: $red-e1;
+	}
+}
+
+
+
