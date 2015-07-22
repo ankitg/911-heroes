@@ -15,6 +15,28 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+//Heroes 9-1-1 Brand Colors
+
+$gray-33:       #333; //font main, lines
+
+$gray-33-lighten-40: lighten($gray-33, 40%); //placeholders
+
+$gray-cb:       #cbcbcb; //btn bkg
+
+$gray-98:       #989898; //font disabled btn
+
+
+$white:         #fff;
+
+$white-lighten-40: lighten($white, 40%); //question mark
+
+
+$red-e1:        #e12a2a; //asteriks
+
+$green-90:      #90f500; //lime green everywhere
+
+
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
