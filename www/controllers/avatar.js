@@ -1,4 +1,4 @@
-angular.module('avatar.controller', [])
+angular.module('911-heroes.controllers', [])
 
 .controller('AvatarCtrl', function($scope) {
 

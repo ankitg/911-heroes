@@ -1,4 +1,4 @@
-angular.module('levelUp.controller', [])
+angular.module('911-heroes.controllers', [])
 
 .controller('LevelUpCtrl', function($scope) {
 

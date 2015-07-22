@@ -1,4 +1,4 @@
-angular.module('final.controller', [])
+angular.module('911-heroes.controllers', [])
 
 .controller('FinalCtrl', function($scope) {
 
