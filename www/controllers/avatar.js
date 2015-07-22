@@ -1,3 +1,5 @@
+angular.module('avatar.controller', [])
+
 .controller('AvatarCtrl', function($scope) {
 
 $scope.avatars = [
@@ -12,7 +14,7 @@ $scope.avatars = [
   '../img/girl4/girl4_0.svg',
   '../img/girl5/girl5_0.svg',
   '../img/girl6/girl6_0.svg'
-]
+];
 
 
 });
