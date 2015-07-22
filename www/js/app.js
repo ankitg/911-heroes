@@ -31,7 +31,7 @@ angular.module('starter', ['ionic'])
     views:  {
       '': {
         templateUrl: 'index.html',
-        // controller: 'MainCtrl'
+        controller: 'MainCtrl'
       }
     }
   })
