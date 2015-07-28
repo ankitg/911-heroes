@@ -1,8 +1,44 @@
+<style>
+  .grid-3-push {
+    margin-left: 12.5%;
+  }
+  .avatar-grid {
+    width: 25%;
+    display: inline;
+    float: left;
+  }
+  .avatar-grid img {
+    margin: 10% auto;
+    height: 120px;
+    display: block;
+  }
+
+  input {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    border: none;
+/*    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;*/
+    height: 100%;
+  }
+
+</style>
+
 <ion-view>
   <ion-content>
 
-  <div ng-repeat="avatar in avatars">
-    <p>{{ avatar }}</p>
+  <div>
+    <img src="{{ avatar.image }}" alt="[image] selected avatar">
+  </div>
+
+  <div ng-class="avatar_margin($index)" ng-repeat="avatar in avatars" class="avatar-grid">
+    <label for="{{avatar.name}}">
+      <img src="{{ avatar.image }}" alt="[image] avatar" width="100%">
+      <input id="{{ avatar.name }}" type="radio" value="{{ avatar.image }}">
+    </label>
   </div>
 
   </ion-content>
