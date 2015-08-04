@@ -1,0 +1,52 @@
+<!-- <video src="videofile.ogg" autoplay poster="posterimage.jpg">
+  Sorry, your browser doesn't support embedded videos, 
+  but don't worry, you can <a href="videofile.ogg">download it</a>
+  and watch it with your favorite video player!
+</video> -->
+
+<style>
+  /*dupilcates*/
+  ion-content {
+    background-color: #90ccef;
+  }
+
+  .btn {
+    font-size: 1.6em;
+    background-color: #90f500;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 90%;
+    margin: 5%;
+    display: block;
+  }
+
+  /*new*/
+  .video-screen {
+    display: block;
+    border: 3px solid white;
+    width: 260px;
+    margin: 20% auto 5%;
+  }
+  .grid-2 {
+    width: 50%;
+    display: inline;
+    float: left;
+  }
+  
+</style>
+
+<ion-view>
+  <ion-content>
+
+    <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
+
+    <div class="grid-2">
+      <button type="button" class="btn">Rewatch</button>
+    </div>
+
+    <div class="grid-2">
+      <button type="button" class="btn">Continue</button>
+    </div>
+
+  </ion-content>
+</ion-view>
