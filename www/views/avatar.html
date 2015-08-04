@@ -1,9 +1,69 @@
+<style>
+  ion-content {
+    background-color: #90ccef;
+  }
+
+  .grid-3-push {
+    margin-left: 12.5%;
+  }
+  .avatar-grid {
+    width: 25%;
+    display: inline;
+    float: left;
+  }
+  .avatar-grid img {
+    margin: 8% auto;
+    height: 75px;
+    display: block;
+  }
+
+  input {
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    /*position: absolute;
+    margin: 0;
+    top: -10px;
+    left: -10px;*/
+    border: none;   
+    height: 100%;*/
+  }
+
+  .selected-avatar {
+    height: 185px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .btn {
+    font-size: 1.6em;
+    background-color: #90f500;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 100%;
+  }
+
+</style>
+
 <ion-view>
   <ion-content>
 
-  <div ng-repeat="avatar in avatars">
-    <p>{{ avatar }}</p>
+  <div style="padding: 3%;">
+
+    <div style="width: 100%">
+      <img class="selected-avatar" src="{{ selectedAvatar.image }}" alt="[image] {{selectedAvatar.name}}" width="100">
+    </div>
+
+    <div ng-class="avatar_margin($index)" ng-repeat="avatar in avatars" class="avatar-grid">
+      <label for="{{ avatar.name }}">
+        <img src="{{ avatar.image }}" alt="[image] avatar" width="100%">
+        <input type="radio" id="{{ avatar.name }}" name="allAvatars" ng-value="avatar" ng-model="$parent.selectedAvatar" >
+      </label>
+    </div>
+
+    <button type="button" class="btn">Continue</button>
   </div>
+
 
   </ion-content>
 </ion-view>
