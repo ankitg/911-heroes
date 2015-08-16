@@ -9,15 +9,27 @@
   ion-content {
     background-color: #90ccef;
   }
-
   .btn {
-    font-size: 1.6em;
-    background-color: #90f500;
-    color: #fff;
-    border: 2px solid #fff;
+    font-size: 1.2em;
+    display: block;
+    color: #999;
+    border: 2px solid #ccc;
+    background-color: #ccc;
+    padding: 8px 0;
+  }
+  .btn-half {
     width: 90%;
     margin: 5%;
-    display: block;
+  }
+  .buttonEnabled {
+    color: #fff;
+    background-color: #90f500;
+    border: 2px solid #fff;
+  }
+  .buttonEnabled:hover {
+    color: #90f500;
+    background-color: #fff;
+    border: 2px solid #90f500;
   }
 
   /*new*/
@@ -41,11 +53,11 @@
     <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
 
     <div class="grid-2">
-      <button type="button" class="btn">Rewatch</button>
+      <button type="button" class="btn btn-half buttonEnabled">Rewatch</button>
     </div>
 
     <div class="grid-2">
-      <button type="button" class="btn">Continue</button>
+      <button type="button" class="btn btn-half buttonEnabled">Continue</button>
     </div>
 
   </ion-content>

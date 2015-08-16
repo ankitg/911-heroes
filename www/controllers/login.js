@@ -1,6 +1,6 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', function($scope, $state) {
 
 
   $scope.submitForm = function(isValid){
@@ -8,7 +8,7 @@ angular.module('911-heroes.controllers', [])
     $scope.submitted = true;
 
     if(isValid) {
-      console.log('party');
+      $state.go('main.avatar');
     }
 
     else {
