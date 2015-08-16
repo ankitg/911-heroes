@@ -1,9 +1,3 @@
-<!-- <video src="videofile.ogg" autoplay poster="posterimage.jpg">
-  Sorry, your browser doesn't support embedded videos, 
-  but don't worry, you can <a href="videofile.ogg">download it</a>
-  and watch it with your favorite video player!
-</video> -->
-
 <style>
   /*dupilcates*/
   ion-content {
@@ -44,11 +38,30 @@
     display: inline;
     float: left;
   }
+
+  .director-container {
+    position: relative;
+  }
+  .director-img {
+    position: absolute;
+    left: 20%;
+    top: -14px;
+  }
   
 </style>
 
 <ion-view>
   <ion-content>
+
+    <div class="director-container">
+      <img ng-show="clapperboard" ng-click="hideClapperboard()" class="director-img" src="../img/clapperboard.png" height="200" alt="[image] clapperboard">
+    </div>
+
+    <!-- <video src="videofile.ogg" autoplay poster="posterimage.jpg">
+      Sorry, your browser doesn't support embedded videos, 
+      but don't worry, you can <a href="videofile.ogg">download it</a>
+      and watch it with your favorite video player!
+    </video> -->
 
     <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
 
@@ -57,7 +70,7 @@
     </div>
 
     <div class="grid-2">
-      <button type="button" class="btn btn-half buttonEnabled">Continue</button>
+      <button ng-class="{ buttonEnabled: !clapperboard }" ng-disable="clapperboard" type="button" class="btn btn-half" ui-sref="main.module1">Continue</button>
     </div>
 
   </ion-content>
