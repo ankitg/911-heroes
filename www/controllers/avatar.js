@@ -50,8 +50,8 @@ angular.module('911-heroes.controllers', [])
   ];
 
   $scope.selectedAvatar = {
-    name: 'no_select',
-    image: '../img/girl6/girl6_0.svg'
+    name: null,
+    image: '../img/question_mark.png'
   };
 
   $scope.avatar_margin = function(index) {
