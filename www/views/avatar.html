@@ -1,9 +1,77 @@
-<ion-view id="avatar">
+<style>
+  ion-content {
+    background-color: #90ccef;
+  }
+
+  .grid-3-push {
+    margin-left: 12.5%;
+  }
+  .grid-4 {
+    width: 25%;
+    display: inline;
+    float: left;
+  }
+  .grid-4 img {
+    margin: 8% auto;
+    height: 75px;
+    display: block;
+  }
+
+  input {
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    /*position: absolute;
+    margin: 0;
+    top: -10px;
+    left: -10px;*/
+    border: none;   
+    height: 100%;*/
+  }
+  .selected-container {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 10px auto;
+  }
+  .selected-avatar {
+    height: 130px;
+    margin: 7px auto 0;
+    display: block;
+  }
+
+  /*dupilcates*/
+  .btn {
+    font-size: 1.2em;
+    display: block;
+    color: #999;
+    border: 2px solid #ccc;
+    background-color: #ccc;
+    padding: 8px 0;
+  }
+  .btn-full {
+    width: 100%;
+    margin: 20px auto;
+  }
+  .buttonEnabled {
+    color: #fff;
+    background-color: #90f500;
+    border: 2px solid #fff;
+  }
+  .buttonEnabled:hover {
+    color: #90f500;
+    background-color: #fff;
+    border: 2px solid #90f500;
+  }
+</style>
+
+<ion-view>
   <ion-content>
 
   <div style="padding: 3%;">
 
-    <div style="width: 100%">
+    <div class="selected-container">
       <img class="selected-avatar" src="{{ selectedAvatar.image }}" alt="[image] {{selectedAvatar.name}}" width="100">
     </div>
 
@@ -14,7 +82,7 @@
       </label>
     </div>
 
-    <button type="button" class="btn">Continue</button>
+    <button ng-class="{ buttonEnabled: selectedAvatar.name !== null}" ng-disable="selectedAvatar.name === null" type="button" class="btn btn-full" ui-sref="main.video">Continue</button>
   </div>
 
 

@@ -10,4 +10,10 @@ angular.module('911-heroes.controllers', [])
     // '../img/emergencies/fire/photo/fire5_x2.jpg'
   ];
 
+  $scope.clapperboard = true;
+
+  $scope.hideClapperboard = function() {
+    $scope.clapperboard = false;
+  }
+
 });
