@@ -10,4 +10,37 @@ angular.module('911-heroes.controllers', [])
     // '../img/emergencies/fire/photo/fire5_x2.jpg'
   ];
 
+  $scope.scores = [
+    {
+      state: 'pass'
+    },
+    {
+      state: 'pass'
+    },
+    {
+      state: 'pass'
+    },
+    {
+      state: 'pass'
+    },
+    {
+      state: 'fail'
+    },
+    {
+      state: 'pass'
+    },
+    {
+      state: 'pass'
+    },
+    {
+      state: 'current'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    }
+  ]
+
 });

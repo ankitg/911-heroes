@@ -38,7 +38,10 @@
     display: inline;
     float: left;
   }
-
+  .true_false {
+    display: block;
+    margin: 0 auto;
+  }
   .director-container {
     position: relative;
   }
@@ -61,13 +64,25 @@
 
     <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
 
-    <div class="grid-2">
-      <img src="../img/true_checkmark.png" height="50" width="50" alt="[image] checkmark (click for true)">
+    <div style="    width: 240px;
+    display: block;
+    margin: 0 auto;">
+      <div class="grid-2">
+        <img class="true_false" src="../img/true_checkmark.png" height="65" width="65" alt="[image] checkmark (click for true)">
+      </div>
+
+      <div class="grid-2">
+        <img class="true_false" src="../img/false_x.png" height="65" width="65" alt="[image] x (click for false)">
+      </div>
     </div>
 
-    <div class="grid-2">
-      <img src="../img/true_checkmark.png" height="50" width="50" alt="[image] x (click for false)">
+    <div style="margin-top: 225px; margin-left: 25px;">
+      <div ng-repeat="score in scores" ng-switch on="score.state" style="display: inline-block;
+    float: left;">
+        <img ng-switch-when='blank' src="../img/score_blank.png" height="60" width="60" alt="">
+        <img ng-switch-when='current' src="../img/score_current.png" height="60" width="60" alt="">
+        <img ng-switch-when='pass' src="../img/score_pass.png" height="60" width="60" alt="">
+        <img ng-switch-when='fail' src="../img/score_fail.png" height="60" width="60" alt="">
     </div>
-
   </ion-content>
 </ion-view>
