@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('911-heroes', ['ionic', '911-heroes.controllers'])
+angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.services', '911-heroes.constants'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
