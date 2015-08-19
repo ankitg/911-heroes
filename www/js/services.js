@@ -1,7 +1,7 @@
 var serviceModule = angular.module('911-heroes.services', []);
 
 serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
-	
+
 	// Order of Modules
 	var modules = ['M1', 'M2', 'M3'];
 
@@ -84,4 +84,25 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 			this.setCurrentPhase(nextState.phase);
 		}
 	};
+}]);
+
+serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
+
+  var setAvatar = function(selectedAvatar) {
+  	window.localStorage.setItem(STORAGE.SELECTED_AVATAR, JSON.stringify(selectedAvatar));
+  };
+
+  var getAvatar = function(){
+  	if(window.localStorage.getItem(STORAGE.SELECTED_AVATAR)) {
+		return JSON.parse(window.localStorage.getItem(STORAGE.SELECTED_AVATAR));
+	} else {
+		return {};
+	}
+  };
+
+  return {
+  	setAvatar: setAvatar,
+  	getAvatar: getAvatar
+  };
+
 }]);

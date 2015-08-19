@@ -1,6 +1,6 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('AvatarCtrl', function($scope) {
+.controller('AvatarCtrl', function($scope, avatarService) {
 
   $scope.avatars = [ 
     {
@@ -49,10 +49,15 @@ angular.module('911-heroes.controllers', [])
     }
   ];
 
-  $scope.selectedAvatar = {
+  // Doing some garbage to test the avatarService, fix appropriately.
+
+  var blankAvatar = {
     name: null,
-    image: '../img/question_mark.png'
+    image: './img/question_mark.png'
   };
+
+  avatarService.setAvatar(blankAvatar);
+  $scope.selectedAvatar = avatarService.getAvatar();
 
   $scope.avatar_margin = function(index) {
     if ( index === 4 ) {
