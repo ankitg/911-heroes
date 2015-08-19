@@ -2,7 +2,7 @@
   <ion-content>
 
     <div class="director-container">
-      <img ng-show="clapperboard" ng-click="hideClapperboard()" class="director-img" src="../img/clapperboard.png" height="200" alt="[image] clapperboard">
+      <img ng-show="clapperboard" ng-click="hideClapperboard()" class="director-img" src="./img/clapperboard.png" height="200" alt="[image] clapperboard">
     </div>
 
     <!-- <video src="videofile.ogg" autoplay poster="posterimage.jpg">
@@ -18,8 +18,10 @@
     </div>
 
     <div class="grid-2">
-      <button ng-class="{ buttonEnabled: !clapperboard }" ng-disable="clapperboard" type="button" class="btn btn-half" ui-sref="main.module1">Continue</button>
+      <button ng-class="{ buttonEnabled: clapperboard === false }" ng-disable="clapperboard" type="button" class="btn btn-half" ui-sref="main.module1">Continue</button>
     </div>
+
+    <img src="" alt="">
 
   </ion-content>
 </ion-view>
