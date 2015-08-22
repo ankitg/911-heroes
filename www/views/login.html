@@ -30,7 +30,18 @@
   			
         <div class="login-footnote"><i class="asterisk"></i> Mandatory</div>
   			
-        <button ng-class="{ buttonEnabled: loginForm.name.$valid && loginForm.street_num.$valid && loginForm.street_name.$valid }" ng-disabled="loginForm.name.$invalid || loginForm.street_num.$invalid || loginForm.street_name.$invalid" type="button" class="btn btn-full" ng-click="submitForm(loginForm.$valid)">Continue</button>
+        <button ng-class="{ buttonEnabled: loginForm.name.$valid && loginForm.street_num.$valid && loginForm.street_name.$valid }" ng-disabled="loginForm.name.$invalid || loginForm.street_num.$invalid || loginForm.street_name.$invalid" type="button" class="btn btn-full" ng-click="submitForm(loginForm.$valid)">Continue
+        <svg ng-show="loginForm.name.$valid && loginForm.street_num.$valid && loginForm.street_name.$valid" class="svg-arrow" width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
+          <g>
+            <path fill="#fff" d="M117.8,80.3c0.2-0.2,0.3-0.3,0.4-0.5c0.1-0.1,0.1-0.2,0.2-0.3c0,0,0.1-0.1,0.1-0.1c0.9-1.2,1.5-2.8,1.5-4.5
+              c0-1.7-0.6-3.2-1.5-4.5c0-0.1-0.1-0.1-0.1-0.2c-0.1-0.1-0.1-0.1-0.2-0.2c-0.1-0.2-0.3-0.3-0.4-0.5L84.5,36.4
+              c-2.9-2.9-7.7-2.9-10.6,0c-2.9,2.9-2.9,7.7,0,10.6l20.5,20.5l-56.9,0c-4.1,0-7.5,3.4-7.5,7.5s3.4,7.5,7.5,7.5l56.9,0L73.9,103
+              c-2.9,2.9-2.9,7.7,0,10.6c2.9,2.9,7.7,2.9,10.6,0L117.8,80.3C117.8,80.3,117.8,80.3,117.8,80.3z"/>
+            <path fill="#fff" d="M0,75c0,41.4,33.6,75,75,75s75-33.6,75-75c0-41.4-33.6-75-75-75C33.6,0,0,33.6,0,75z M135,75
+              c0,33.1-26.9,60-60,60c-33.1,0-60-26.9-60-60c0-33.1,26.9-60,60-60C108.1,15,135,41.9,135,75z"/>
+          </g>
+        </svg>
+        </button>
   		</form>
 
     </div>

@@ -50,6 +50,46 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     color: #e12a2a;
 }
 
+//ALL
+
+  //buttons
+  .btn {
+    font-size: 1.2em;
+    display: block;
+    color: #999;
+    border: 2px solid #ccc;
+    background-color: #ccc;
+    padding: 8px 0;
+  }
+  .svg-arrow {
+    vertical-align: sub;
+    margin-right: -40px;
+    margin-left: 20px;
+  }
+  .btn-full {
+    width: 100%;
+    margin: 20px auto;
+  }
+  .buttonEnabled {
+    color: #fff;
+    background-color: #90f500;
+    border: 2px solid #fff;
+
+    // .svg-arrow path {
+    //     fill: #fff;
+    //   }
+  }
+  .btn-half {
+    width: 90%;
+    margin: 5%;
+  }
+  .buttonEnabled:active {
+    color: #90f500;
+    background-color: #fff;
+    border: 2px solid #90f500;
+  }
+
+
 // Login View
 #login {
 
@@ -75,7 +115,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 		}
 		color: $red-e1;
 	}
-
+}
 
 //login
   body {
@@ -89,32 +129,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     margin: 10px auto;
     width: 150px;
     display: block;
-  }
-  .btn {
-    font-size: 1.2em;
-    display: block;
-    color: #999;
-    border: 2px solid #ccc;
-    background-color: #ccc;
-    padding: 8px 0;
-  }
-  .btn-full {
-    width: 100%;
-    margin: 20px auto;
-  }
-  .buttonEnabled {
-    color: #fff;
-    background-color: #90f500;
-    border: 2px solid #fff;
-  }
-  .btn-half {
-    width: 90%;
-    margin: 5%;
-  }
-  .buttonEnabled:active {
-    color: #90f500;
-    background-color: #fff;
-    border: 2px solid #90f500;
   }
 
 //avatar
@@ -152,6 +166,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     margin: 7px auto 0;
     display: block;
   }
+  .avatar-label {
+    position: relative;
+  }
+  .avatarInput {
+    border: 1px solid #fff;
+    position: absolute;
+    width: 80px;
+    height: 94px;
+    bottom: -3px;
+    left: 2px;
+    border-radius: 7px;
+  }
 
 //video
 .video-screen {
@@ -176,13 +202,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   top: -14px;
 
 	.has-error {
-	    text-align: right;
+	   text-align: right;
 	}
 }
 
 
 //module1
-.true_false {
+.true-false {
   display: block;
   margin: 0 auto;
 }

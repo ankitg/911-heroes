@@ -7697,6 +7697,40 @@ a.button {
 .app-background .pane {
   background: linear-gradient(to bottom, #b6daef 0%, #91d0f4 100%); }
 
+.has-error {
+  color: #e12a2a; }
+
+.btn {
+  font-size: 1.2em;
+  display: block;
+  color: #999;
+  border: 2px solid #ccc;
+  background-color: #ccc;
+  padding: 8px 0; }
+
+.svg-arrow {
+  vertical-align: sub;
+  margin-right: -40px;
+  margin-left: 20px; }
+
+.btn-full {
+  width: 100%;
+  margin: 20px auto; }
+
+.buttonEnabled {
+  color: #fff;
+  background-color: #90f500;
+  border: 2px solid #fff; }
+
+.btn-half {
+  width: 90%;
+  margin: 5%; }
+
+.buttonEnabled:active {
+  color: #90f500;
+  background-color: #fff;
+  border: 2px solid #90f500; }
+
 #login .login-container {
   width: 80%;
   margin: 0 auto; }
@@ -7725,32 +7759,6 @@ body {
   margin: 10px auto;
   width: 150px;
   display: block; }
-
-.btn {
-  font-size: 1.2em;
-  display: block;
-  color: #999;
-  border: 2px solid #ccc;
-  background-color: #ccc;
-  padding: 8px 0; }
-
-.btn-full {
-  width: 100%;
-  margin: 20px auto; }
-
-.buttonEnabled {
-  color: #fff;
-  background-color: #90f500;
-  border: 2px solid #fff; }
-
-.btn-half {
-  width: 90%;
-  margin: 5%; }
-
-.buttonEnabled:active {
-  color: #90f500;
-  background-color: #fff;
-  border: 2px solid #90f500; }
 
 .grid-3-push {
   margin-left: 12.5%; }
@@ -7784,6 +7792,18 @@ input {
   margin: 7px auto 0;
   display: block; }
 
+.avatar-label {
+  position: relative; }
+
+.avatarInput {
+  border: 1px solid #fff;
+  position: absolute;
+  width: 80px;
+  height: 94px;
+  bottom: -3px;
+  left: 2px;
+  border-radius: 7px; }
+
 .video-screen {
   display: block;
   border: 3px solid white;
@@ -7802,7 +7822,9 @@ input {
   position: absolute;
   left: 20%;
   top: -14px; }
+  .director-img .has-error {
+    text-align: right; }
 
-.true_false {
+.true-false {
   display: block;
   margin: 0 auto; }

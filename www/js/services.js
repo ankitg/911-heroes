@@ -96,7 +96,7 @@ serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
   	if(window.localStorage.getItem(STORAGE.SELECTED_AVATAR)) {
 		return JSON.parse(window.localStorage.getItem(STORAGE.SELECTED_AVATAR));
 	} else {
-		return {};
+		return null;
 	}
   };
 
