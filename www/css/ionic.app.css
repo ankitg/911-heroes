@@ -7708,10 +7708,15 @@ a.button {
   background-color: #ccc;
   padding: 8px 0; }
 
-.svg-arrow {
+.svg-arrow-full {
   vertical-align: sub;
   margin-right: -40px;
   margin-left: 20px; }
+
+.svg-arrow-half {
+  vertical-align: sub;
+  margin-right: -5px;
+  margin-left: 5px; }
 
 .btn-full {
   width: 100%;
@@ -7788,8 +7793,7 @@ input {
   margin: 10px auto; }
 
 .selected-avatar {
-  height: 130px;
-  margin: 7px auto 0;
+  margin: 11px auto 0;
   display: block; }
 
 .avatar-label {
@@ -7808,7 +7812,7 @@ input {
   display: block;
   border: 3px solid white;
   width: 260px;
-  margin: 20% auto 5%; }
+  margin: 15% auto 5%; }
 
 .grid-2 {
   width: 50%;
@@ -7825,6 +7829,20 @@ input {
   .director-img .has-error {
     text-align: right; }
 
+.video-avatar {
+  margin: 150px auto 0;
+  display: block; }
+
+.true-false-wrap {
+  width: 240px;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden; }
+
 .true-false {
   display: block;
   margin: 0 auto; }
+
+.module1-avatar {
+  margin: 10px auto 15px;
+  display: block; }

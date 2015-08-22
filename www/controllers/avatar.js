@@ -2,8 +2,9 @@ angular.module('911-heroes.controllers', [])
 
 .controller('AvatarCtrl', function($scope, avatarService) {
 
-var makeAvatar = function (name, img0, img1, img2, img3, img4, img5, img6, img7, img8, img9) {
+var makeAvatar = function (type, name, img0, img1, img2, img3, img4, img5, img6, img7, img8, img9) {
   return {
+    type: type,
     name: name,
     hands_on_hips: img0,
     point_screen_right: img1,

@@ -2,6 +2,8 @@ angular.module('911-heroes.controllers', [])
 
 .controller('VideoCtrl', function($scope, avatarService) {
 
+  $scope.selectedAvatar = avatarService.getAvatar();
+
   $scope.scenarios = [ 
     './img/emergencies/fire/photo/fire1_x2.jpg',
     // './img/emergencies/fire/photo/fire2_x1.jpg',
@@ -15,7 +17,5 @@ angular.module('911-heroes.controllers', [])
   $scope.hideClapperboard = function() {
     $scope.clapperboard = false;
   }
-
-  $scope.selectedAvatar = avatarService.getAvatar();
 
 });

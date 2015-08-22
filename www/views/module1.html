@@ -9,9 +9,7 @@
 
     <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
 
-    <div style="    width: 240px;
-    display: block;
-    margin: 0 auto;">
+    <div class="true-false-wrap">
       <div class="grid-2">
         <img class="true-false" src="./img/true_checkmark.png" height="65" width="65" alt="[image] checkmark (click for true)">
       </div>
@@ -21,7 +19,9 @@
       </div>
     </div>
 
-    <div style="margin-top: 225px; margin-left: 25px;">
+    <img class="module1-avatar" src="{{ selectedAvatar.popcorn }}" alt="[image] {{selectedAvatar.name}}" width="120">
+
+    <div style="margin-left: 25px;">
       <div ng-repeat="score in scores" ng-switch on="score.state" style="display: inline-block;
     float: left;">
         <img ng-switch-when='blank' src="./img/score_blank.png" height="60" width="60" alt="">
