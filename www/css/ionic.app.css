@@ -7700,6 +7700,10 @@ a.button {
 .has-error {
   color: #e12a2a; }
 
+.btn-wrap {
+  width: 80%;
+  margin: 0 auto; }
+
 .btn {
   font-size: 1.2em;
   display: block;
@@ -7846,3 +7850,24 @@ input {
 .module1-avatar {
   margin: 10px auto 15px;
   display: block; }
+
+.svg-level-up {
+  display: block;
+  margin: 30px auto; }
+
+.levelUp-avatar {
+  width: 250px;
+  display: block;
+  margin: 30px auto; }
+
+.svg-timeOut {
+  display: block;
+  margin: 50px auto; }
+
+.svg-practice-again {
+  margin-bottom: 50px; }
+
+.svg-lets {
+  width: 150px;
+  display: block;
+  margin: 100px auto 25px; }

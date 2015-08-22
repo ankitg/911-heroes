@@ -53,6 +53,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //ALL
 
   //buttons
+  .btn-wrap {
+    width: 80%;
+    margin: 0 auto;
+  }
   .btn {
     font-size: 1.2em;
     display: block;
@@ -228,4 +232,33 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .module1-avatar {
   margin: 10px auto 15px;
   display: block;
+}
+
+//levelUp
+.svg-level-up {
+  display: block;
+  margin: 30px auto;
+}
+//avatar-, -avatar
+.levelUp-avatar {
+  width: 250px;
+  display: block;
+  margin: 30px auto;
+}
+
+//timeOut
+.svg-timeOut {
+  display: block;
+  margin: 50px auto;
+}
+
+//tryAgain
+.svg-practice-again {
+  margin-bottom: 50px;
+}
+
+.svg-lets {
+  width: 150px;
+  display: block;
+  margin: 100px auto 25px;
 }
