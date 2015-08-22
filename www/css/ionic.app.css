@@ -7697,6 +7697,9 @@ a.button {
 .app-background .pane {
   background: linear-gradient(to bottom, #b6daef 0%, #91d0f4 100%); }
 
+.has-error {
+  color: #e12a2a; }
+
 #login .login-container {
   width: 80%;
   margin: 0 auto; }
@@ -7802,6 +7805,8 @@ input {
   position: absolute;
   left: 20%;
   top: -14px; }
+  .director-img .has-error {
+    text-align: right; }
 
 .true_false {
   display: block;

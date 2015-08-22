@@ -3,85 +3,108 @@ var serviceModule = angular.module('911-heroes.services', []);
 serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 	// Order of Modules
-	var modules = ['M1', 'M2', 'M3'];
+	var modules = ['Pre', 'M1', 'M2', 'M3'];
 
 	// Order of Phases for each module
 	var phases = {
+		'Pre':['login', 'avatar'],
 		'M1': ['M1P1', 'M1P2', 'M1P3'],
 		'M2': ['M2P1', 'M2P2', 'M2P3'],
 		'M3': ['M3P1', 'M3P2'],
 	};
 
-	var NavState = function (module, phase) {
-		this.module	= module;
-		this.phase 	= phase;
+	var phaseToStateMap = {
+		'login':  'main.login',
+		'avatar': 'main.avatar',
 	};
 
-	function getNextNavState(currModule, currPhase) {
+	var moduleToStateMap = {
+		'M1': 'main.module1',
+		'M2': 'main.module2',
+		'M3': 'main.module3',
+	};
 
-		if (!currModule) {
-			currModule = modules[0];
-		};
+	var NavLocation = function (module, phase, state) {
+		this.module	= module;
+		this.phase 	= phase;
+		this.state	= state;
+	};
 
-		var modPhases = phases[currModule];
+	function findState(module, phase) {
 
-		var phaseIndex = modPhases.indexOf(currPhase);
+		// state for the phase
+		var state = phaseToStateMap[ phase ];
 
-		if (phaseIndex+1 < modPhases.length) {
-			// Go to next Phase
-			var nextPhase = modPhases[phaseIndex + 1];
-			return new NavState(currModule, nextPhase);
-		} else {
-			// Go to next module
-			var moduleIndex = modules.indexOf(currModule);
+		if (!state) {
+			// Fall back on state for the module
+			state = moduleToStateMap[ module];
+		} 
 
-			if (moduleIndex+1 < modules.length) {
-
-				var nextModule = modules[moduleIndex+1];
-				return getNextNavState(nextModule);
-			} else {
-				return null;
-			}
-		}
-
-		return null;
+		return state;
 	}
 
 	return {
 
-		// CURRENT MODULE
+		/**
+		 Object defined within the stateService. Use `new` to create new ones.
+		 */
+		NavLocation: NavLocation,
 
-		getCurrentModule: function () {
-			return window.localStorage.getItem(STORAGE.CURRENT_MODULE);
+		// CURRENT NAV LOCATION
+
+		setCurrentNavLocation: function (currNavLocation) {
+			window.localStorage.setItem(STORAGE.CURRENT_NAV_LOCATION, JSON.stringify(currNavLocation));
 		},
-		setCurrentModule: function (currModule) {
-			window.localStorage.setItem(STORAGE.CURRENT_MODULE, currModule);
+		getCurrentNavLocation: function () {
+			var navLocationString = window.localStorage.getItem(STORAGE.CURRENT_NAV_LOCATION);
+			if (navLocationString) {
+				return JSON.parse(navLocationString);
+			}
+			return null;
 		},
 
-		// CURRENT PHASE
+		/**
+		 * Gets the follow navLocation
+		 *
+		 * @param navLocation	optional, if not provided, it will use the current nav location
+		 * @returns	NavLocation
+		 */
+		getNextNavLocation: function (navLocation) {
 
-		getCurrentPhase: function () {
-			return window.localStorage.getItem(STORAGE.CURRENT_PHASE);
-		},
-		setCurrentPhase: function (currPhase) {
-			window.localStorage.setItem(STORAGE.CURRENT_PHASE, currPhase);
-		},
+			if (!navLocation) {
+				// Find Saved
+				navLocation = this.getCurrentNavLocation();
 
-
-
-		onNext: function () {
-
-			var currModule 	= this.getCurrentModule();
-			var currPhase	= this.getCurrentPhase();
-			var nextState	= getNextNavState(currModule, currPhase);
-
-			if (!nextState) {
-				// All Done!
-				return;
+				if (!navLocation) {
+					// No saved location, go to beginning
+					navLocation = new NavLocation(modules[0], null, null);
+				}
 			}
 
-			this.setCurrentModule(nextState.module);
-			this.setCurrentPhase(nextState.phase);
+			var modPhases = phases[navLocation.module];
+
+			var phaseIndex = modPhases.indexOf(navLocation.phase);
+
+			if (phaseIndex+1 < modPhases.length) {
+				// Go to next Phase
+				var nextPhase = modPhases[phaseIndex + 1];
+				var state = findState(navLocation.module, nextPhase);
+				return new NavLocation(navLocation.module, nextPhase, state);
+			} else {
+				// Go to next module
+				var moduleIndex = modules.indexOf(navLocation.module);
+
+				if (moduleIndex+1 < modules.length) {
+
+					var nextModule = modules[moduleIndex+1];
+					var aNavLocation = new NavLocation(nextModule, null, null);
+					return this.getNextNavLocation(aNavLocation);
+				} else {
+					return null;
+				}
+			}
+
+			return null;
 		}
 	};
 }]);

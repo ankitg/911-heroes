@@ -30,9 +30,8 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     abstract: true,
     views:  {
       '': {
-        templateUrl: 'index.html'
-        //,
-        //controller: 'MainCtrl'
+        templateUrl: 'index.html',
+        controller: 'MainCtrl'
       }
     }
   })
