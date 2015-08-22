@@ -96,7 +96,20 @@ serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
   	if(window.localStorage.getItem(STORAGE.SELECTED_AVATAR)) {
 		return JSON.parse(window.localStorage.getItem(STORAGE.SELECTED_AVATAR));
 	} else {
-		return null;
+		return {
+		    name: 'blank',
+		    type: "Girl",
+		    hands_on_hips: './img/question_mark.png',
+		    point_screen_right: './img/question_mark.png',
+		    point_screen_left: './img/question_mark.png',
+		    background: './img/question_mark.png',
+		    one_thumbs_up: './img/question_mark.png',
+		    phone_up: './img/question_mark.png',
+		    practice_again_sad: './img/question_mark.png',
+		    two_thumbs_up_star: './img/question_mark.png',
+		    two_thumbs_up: './img/question_mark.png',
+		    popcorn: './img/question_mark.png'
+		};
 	}
   };
 
