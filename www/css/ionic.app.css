@@ -7700,6 +7700,46 @@ a.button {
 .has-error {
   color: #e12a2a; }
 
+.btn-wrap {
+  width: 80%;
+  margin: 0 auto; }
+
+.btn {
+  font-size: 1.2em;
+  display: block;
+  color: #999;
+  border: 2px solid #ccc;
+  background-color: #ccc;
+  padding: 8px 0; }
+
+.svg-arrow-full {
+  vertical-align: sub;
+  margin-right: -40px;
+  margin-left: 20px; }
+
+.svg-arrow-half {
+  vertical-align: sub;
+  margin-right: -5px;
+  margin-left: 5px; }
+
+.btn-full {
+  width: 100%;
+  margin: 20px auto; }
+
+.buttonEnabled {
+  color: #fff;
+  background-color: #90f500;
+  border: 2px solid #fff; }
+
+.btn-half {
+  width: 90%;
+  margin: 5%; }
+
+.buttonEnabled:active {
+  color: #90f500;
+  background-color: #fff;
+  border: 2px solid #90f500; }
+
 #login .login-container {
   width: 80%;
   margin: 0 auto; }
@@ -7729,32 +7769,6 @@ body {
   width: 150px;
   display: block; }
 
-.btn {
-  font-size: 1.2em;
-  display: block;
-  color: #999;
-  border: 2px solid #ccc;
-  background-color: #ccc;
-  padding: 8px 0; }
-
-.btn-full {
-  width: 100%;
-  margin: 20px auto; }
-
-.buttonEnabled {
-  color: #fff;
-  background-color: #90f500;
-  border: 2px solid #fff; }
-
-.btn-half {
-  width: 90%;
-  margin: 5%; }
-
-.buttonEnabled:active {
-  color: #90f500;
-  background-color: #fff;
-  border: 2px solid #90f500; }
-
 .grid-3-push {
   margin-left: 12.5%; }
 
@@ -7783,15 +7797,26 @@ input {
   margin: 10px auto; }
 
 .selected-avatar {
-  height: 130px;
-  margin: 7px auto 0;
+  margin: 11px auto 0;
   display: block; }
+
+.avatar-label {
+  position: relative; }
+
+.avatarInput {
+  border: 1px solid #fff;
+  position: absolute;
+  width: 80px;
+  height: 94px;
+  bottom: -3px;
+  left: 2px;
+  border-radius: 7px; }
 
 .video-screen {
   display: block;
   border: 3px solid white;
   width: 260px;
-  margin: 20% auto 5%; }
+  margin: 15% auto 5%; }
 
 .grid-2 {
   width: 50%;
@@ -7808,6 +7833,41 @@ input {
   .director-img .has-error {
     text-align: right; }
 
-.true_false {
+.video-avatar {
+  margin: 150px auto 0;
+  display: block; }
+
+.true-false-wrap {
+  width: 240px;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.true-false {
   display: block;
   margin: 0 auto; }
+
+.module1-avatar {
+  margin: 10px auto 15px;
+  display: block; }
+
+.svg-level-up {
+  display: block;
+  margin: 30px auto; }
+
+.levelUp-avatar {
+  width: 250px;
+  display: block;
+  margin: 30px auto; }
+
+.svg-timeOut {
+  display: block;
+  margin: 50px auto; }
+
+.svg-practice-again {
+  margin-bottom: 50px; }
+
+.svg-lets {
+  width: 150px;
+  display: block;
+  margin: 100px auto 25px; }

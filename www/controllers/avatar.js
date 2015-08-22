@@ -2,86 +2,70 @@ angular.module('911-heroes.controllers', [])
 
 .controller('AvatarCtrl', function($scope, avatarService) {
 
-/*
-  img1: hand on hips
-*/
-
-// var makeAvatar = function (name, img1, img2, img3) {
-//   return {
-//     name: name,
-//     main_img: img1,
-//     hand_on_hip
-//   }
-// }
-// $scope.avatars = [];
-
-// for()
-// $scope.avatars.push(makeAvatar('boy1','',''))
-
-
-
-  $scope.avatars = [ 
-    {
-      name: 'boy 1',
-      image: './img/boy1/boy1_0.svg',
-    },
-    {
-      name: 'boy 2',
-      image: './img/boy2/boy2_0.svg',
-    },
-    {
-      name: 'boy 3',
-      image: './img/boy3/boy3_0.svg',
-    },
-    {
-      name: 'boy 4',
-      image: './img/boy4/boy4_0.svg',
-    },
-    {
-      name: 'boy 5',
-      image: './img/boy5/boy5_0.svg',
-    },
-    {
-      name: 'girl 1',
-      image: './img/girl1/girl1_0.svg',
-    },
-    {
-      name: 'girl 2',
-      image: './img/girl2/girl2_0.svg',
-    },
-    {
-      name: 'girl 3',
-      image: './img/girl3/girl3_0.svg',
-    },
-    {
-      name: 'girl 4',
-      image: './img/girl4/girl4_0.svg',
-    },
-    {
-      name: 'girl 5',
-      image: './img/girl5/girl5_0.svg',
-    },
-    {
-      name: 'girl 6',
-      image: './img/girl6/girl6_0.svg'
-    }
-  ];
-
-  // Doing some garbage to test the avatarService, fix appropriately.
-
-  var blankAvatar = {
-    name: null,
-    image: './img/question_mark.png'
+var makeAvatar = function (name, type, img0, img1, img2, img3, img4, img5, img6, img7, img8, img9) {
+  return {
+    name: name,
+    type: type, // Boy OR Girl -- mapped to the folder names :)
+    hands_on_hips: img0,
+    point_screen_right: img1,
+    point_screen_left: img2,
+    background: img3,
+    one_thumbs_up: img4,
+    phone_up: img5,
+    practice_again_sad: img6,
+    two_thumbs_up_star: img7,
+    two_thumbs_up: img8,
+    popcorn: img9
   };
+};
 
-  avatarService.setAvatar(blankAvatar);
+$scope.avatars = [];
+
+for( var index = 1; index <= 5; index++) {
+  $scope.avatars.push(makeAvatar(
+    'boy'+index,
+    'Boy',
+    './img/boy'+index+'/boy'+index+'_0.svg',
+    './img/boy'+index+'/boy'+index+'_1.svg',
+    './img/boy'+index+'/boy'+index+'_2.svg',
+    './img/boy'+index+'/boy'+index+'_3.svg',
+    './img/boy'+index+'/boy'+index+'_4.svg',
+    './img/boy'+index+'/boy'+index+'_5.svg',
+    './img/boy'+index+'/boy'+index+'_6.svg',
+    './img/boy'+index+'/boy'+index+'_7.svg',
+    './img/boy'+index+'/boy'+index+'_8.svg',
+    './img/boy'+index+'/boy'+index+'_9.svg'
+  ));
+}
+
+for( var index = 1; index <= 6; index++) {
+  $scope.avatars.push(makeAvatar(
+    'girl'+index,
+    'Girl',
+    './img/girl'+index+'/girl'+index+'_0.svg',
+    './img/girl'+index+'/girl'+index+'_1.svg',
+    './img/girl'+index+'/girl'+index+'_2.svg',
+    './img/girl'+index+'/girl'+index+'_3.svg',
+    './img/girl'+index+'/girl'+index+'_4.svg',
+    './img/girl'+index+'/girl'+index+'_5.svg',
+    './img/girl'+index+'/girl'+index+'_6.svg',
+    './img/girl'+index+'/girl'+index+'_7.svg',
+    './img/girl'+index+'/girl'+index+'_8.svg',
+    './img/girl'+index+'/girl'+index+'_9.svg'
+  ));
+}
+
   $scope.selectedAvatar = avatarService.getAvatar();
+
+  $scope.selectAvatar = function(selectedAvatar) {
+    avatarService.setAvatar(selectedAvatar);
+    $scope.selectedAvatar = selectedAvatar;
+  };
 
   $scope.avatar_margin = function(index) {
     if ( index === 4 ) {
-      return 'grid-3-push'
+      return 'grid-3-push';
     }
   };
-
 
 });

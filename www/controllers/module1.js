@@ -1,6 +1,8 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('Module1Ctrl', function($scope) {
+.controller('Module1Ctrl', function($scope , avatarService) {
+
+  $scope.selectedAvatar = avatarService.getAvatar();
 
   $scope.scenarios = [ 
     './img/emergencies/fire/photo/fire1_x2.jpg',
