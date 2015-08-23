@@ -78,8 +78,6 @@ angular.module('911-heroes.controllers', [])
     scenarioSetArray[index] = scenarios[scenarioSetCategories[index]][chosenScenario];
   }
 
-  $scope.playAudio("IdentifyingEmergency1.mp3");
-
   var currentIndex = 0;
   $scope.scenario = scenarioSetArray[currentIndex];
 
@@ -94,9 +92,18 @@ angular.module('911-heroes.controllers', [])
     if(currentIndex < scenarioSetArray.length - 1) {
       currentIndex++;
       $scope.scenario = scenarioSetArray[currentIndex];
+      audioPrompt();
       $scope.scores[currentIndex] = { 'state':'current' };
     }
   };
+
+  function audioPrompt() {
+    // Add check for audio prompts
+    if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
+    else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
+  }
+
+  $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);
 
   $scope.scores = [
     {
