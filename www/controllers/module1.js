@@ -66,6 +66,7 @@ angular.module('911-heroes.controllers', [])
   }
 
   var scenarioSet = {};
+  var scenarioSetArray = [];
 
   for (var index=0; index<10; index++) {
     var chosenScenario = Math.floor(Math.random() * (scenarios[scenarioSetCategories[index]].length));
@@ -74,24 +75,27 @@ angular.module('911-heroes.controllers', [])
       chosenScenario = Math.floor(Math.random() * (scenarios[scenarioSetCategories[index]].length));
     }
     scenarioSet[scenarios[scenarioSetCategories[index]][chosenScenario].id] = scenarios[scenarioSetCategories[index]][chosenScenario];
+    scenarioSetArray[index] = scenarios[scenarioSetCategories[index]][chosenScenario];
   }
 
   $scope.playAudio("IdentifyingEmergency1.mp3");
 
   var currentIndex = 0;
-  $scope.scenario = scenarioSet[Object.keys(scenarioSet)[currentIndex]];
+  $scope.scenario = scenarioSetArray[currentIndex];
 
   $scope.validateAnswer = function(answer) {
-    if(answer === scenarioSet[Object.keys(scenarioSet)[currentIndex]].is_emergency) {
+    if(answer === scenarioSetArray[currentIndex].is_emergency) {
       $scope.scores[currentIndex] = { 'state':'pass' };
     }
     else {
       $scope.scores[currentIndex] = { 'state':'fail' };
     }
-    currentIndex++;
 
-    $scope.scenario = scenarioSet[Object.keys(scenarioSet)[currentIndex]];
-    $scope.scores[currentIndex] = { 'state':'current' };
+    if(currentIndex < scenarioSetArray.length - 1) {
+      currentIndex++;
+      $scope.scenario = scenarioSetArray[currentIndex];
+      $scope.scores[currentIndex] = { 'state':'current' };
+    }
   };
 
   $scope.scores = [
