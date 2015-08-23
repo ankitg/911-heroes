@@ -5,11 +5,11 @@
 
     <div class="true-false-wrap">
       <div class="grid-2">
-        <img ui-sref="main.levelUp" class="true-false" src="./img/true_checkmark.png" height="65" width="65" alt="[image] checkmark (click for true)">
+        <img class="true-false" src="./img/true_checkmark.png" height="65" width="65" alt="[image] checkmark (click for true)" ng-click="validateAnswer(true)">
       </div>
 
       <div class="grid-2">
-        <img class="true-false" src="./img/false_x.png" height="65" width="65" alt="[image] x (click for false)">
+        <img class="true-false" src="./img/false_x.png" height="65" width="65" alt="[image] x (click for false)" ng-click="validateAnswer(false)">
       </div>
     </div>
 

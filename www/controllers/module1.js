@@ -78,30 +78,23 @@ angular.module('911-heroes.controllers', [])
 
   $scope.playAudio("IdentifyingEmergency1.mp3");
 
-  $scope.scenario = scenarioSet[Object.keys(scenarioSet)[0]];
+  var currentIndex = 0;
+  $scope.scenario = scenarioSet[Object.keys(scenarioSet)[currentIndex]];
+
+  $scope.validateAnswer = function(answer) {
+    if(answer === scenarioSet[Object.keys(scenarioSet)[currentIndex]].is_emergency) {
+      $scope.scores[currentIndex] = { 'state':'pass' };
+    }
+    else {
+      $scope.scores[currentIndex] = { 'state':'fail' };
+    }
+    currentIndex++;
+
+    $scope.scenario = scenarioSet[Object.keys(scenarioSet)[currentIndex]];
+    $scope.scores[currentIndex] = { 'state':'current' };
+  };
 
   $scope.scores = [
-    {
-      state: 'pass'
-    },
-    {
-      state: 'pass'
-    },
-    {
-      state: 'pass'
-    },
-    {
-      state: 'pass'
-    },
-    {
-      state: 'fail'
-    },
-    {
-      state: 'pass'
-    },
-    {
-      state: 'pass'
-    },
     {
       state: 'current'
     },
@@ -110,7 +103,28 @@ angular.module('911-heroes.controllers', [])
     },
     {
       state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
     }
-  ]
+  ];
 
 });
