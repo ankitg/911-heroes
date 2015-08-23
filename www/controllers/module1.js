@@ -113,14 +113,20 @@ angular.module('911-heroes.controllers', [])
 
   function audioPrompt() {
     // Add check for audio prompts
-    if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
-    else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
+    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2")
+    {
+      if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
+      else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
+    }
   }
 
   function visualPrompt() {
     // Add check for visual prompts
-    if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
-    else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
+    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2")
+    {
+      if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
+      else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
+    }
   }
 
   $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);

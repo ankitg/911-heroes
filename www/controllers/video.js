@@ -14,11 +14,20 @@ angular.module('911-heroes.controllers', [])
     video.play();
     video.onended = function() { console.log("ENABLE ALL THE BUTTONS NOW!"); }; // Enable the buttons after video has ended
   };
+  var stopVideo = function() {
+    video = document.getElementById('videoScreen');
+    video.pause();
+  };
 
   $scope.playAudio("ModelingVideo.mp3", null, playVideo);
 
   $scope.playVideo = function() {
     playVideo();
+  };
+
+  $scope.continue = function() {
+    stopVideo();
+    $scope.goToNext();
   };
 
 });
