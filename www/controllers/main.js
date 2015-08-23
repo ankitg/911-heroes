@@ -1,6 +1,10 @@
-angular.module('911-heroes.controllers', [])
+var controllers = angular.module('911-heroes.controllers', []);
 
-.controller('MainCtrl', ['$scope', 'stateService', '$state', function($scope, stateService, $state) {
+controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', function($scope, stateService, $state) {
+
+	// On start, navigate to a specific page
+	var startNavLocation = stateService.getNavLocationForStart();
+	$state.go(startNavLocation.state);
 
 	$scope.goToNext = function() {
 		var nextNavLocation = stateService.getNextNavLocation();

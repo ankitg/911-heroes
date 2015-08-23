@@ -7,15 +7,16 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 	// Order of Phases for each module
 	var phases = {
-		'Pre':['login', 'avatar'],
+		'Pre':['avatar', 'start', 'video'],
 		'M1': ['M1P1', 'M1P2', 'M1P3'],
 		'M2': ['M2P1', 'M2P2', 'M2P3'],
 		'M3': ['M3P1', 'M3P2'],
 	};
 
 	var phaseToStateMap = {
-		'login':  'main.login',
 		'avatar': 'main.avatar',
+		'start': 'main.start',
+		'video': 'main.video',
 	};
 
 	var moduleToStateMap = {
@@ -105,6 +106,17 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 			}
 
 			return null;
+		},
+
+		getNavLocationForStart: function() {
+			var lastLocation = this.getCurrentNavLocation();
+			if (lastLocation) {
+				// start screen
+				return new NavLocation(null, null, 'main.start');
+			} else {
+				// login
+				return new NavLocation(null, null, 'main.login');
+			}
 		}
 	};
 }]);
