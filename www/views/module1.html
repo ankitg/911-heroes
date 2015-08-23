@@ -1,13 +1,7 @@
 <ion-view>
   <ion-content>
 
-    <!-- <video src="videofile.ogg" autoplay poster="posterimage.jpg">
-      Sorry, your browser doesn't support embedded videos, 
-      but don't worry, you can <a href="videofile.ogg">download it</a>
-      and watch it with your favorite video player!
-    </video> -->
-
-    <img class="video-screen" ng-repeat="scenario in scenarios" src="{{ scenario }}" alt="[image] possible emergency" width="260" height="175">
+    <img class="video-screen" ng-src="{{ scenario.src }}" alt="[Image] {{ scenario.alt }}" width="260" height="175">
 
     <div class="true-false-wrap">
       <div class="grid-2">
@@ -29,5 +23,7 @@
         <img ng-switch-when='pass' src="./img/score_pass.png" height="60" width="60" alt="">
         <img ng-switch-when='fail' src="./img/score_fail.png" height="60" width="60" alt="">
     </div>
+
+    <audio id="audioClip"/> <!-- Now let's practice -->
   </ion-content>
 </ion-view>
