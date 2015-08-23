@@ -55,8 +55,6 @@ for( var index = 1; index <= 6; index++) {
   ));
 }
 
-  $scope.selectedAvatar = avatarService.getAvatar();
-
   $scope.selectAvatar = function(selectedAvatar) {
     avatarService.setAvatar(selectedAvatar);
     $scope.selectedAvatar = selectedAvatar;
@@ -68,4 +66,5 @@ for( var index = 1; index <= 6; index++) {
     }
   };
 
+  $scope.playAudio("PickYourHero.mp3");
 });
