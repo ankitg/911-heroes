@@ -9,7 +9,7 @@
 
     <div ng-class="avatar_margin($index)" ng-repeat="avatar in avatars" class="grid-4">
       <label class="avatar-label" for="{{ avatar.name }}">
-        <img src="{{ avatar.hands_on_hips }}" alt="[image] avatar" width="100%">
+        <img ng-src="{{ avatar.hands_on_hips }}" alt="[image] avatar" width="100%">
         <input type="radio" id="{{ avatar.name }}" name="allAvatars" ng-value="avatar" ng-model="selectedAvatar" ng-click="$parent.selectAvatar(selectedAvatar)" >
       </label>
     </div>

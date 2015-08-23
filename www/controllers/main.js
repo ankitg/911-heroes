@@ -14,7 +14,11 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 
 	$scope.selectedAvatar = avatarService.getAvatar();
 
-	$scope.currentPhase = stateService.getCurrentNavLocation().phase;
+	$scope.currentPhase = null;
+	if(stateService.getCurrentNavLocation())
+	{
+		$scope.currentPhase = stateService.getCurrentNavLocation().phase;
+	}
 
 	$scope.playAudio = function(audioSrc, audioElementId, callback) {
 		if(!audioElementId) { audioElementId="audioClip"; }
