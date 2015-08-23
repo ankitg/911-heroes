@@ -3,19 +3,21 @@ var serviceModule = angular.module('911-heroes.services', []);
 serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 	// Order of Modules
-	var modules = ['Pre', 'M1', 'M2', 'M3'];
+	var modules = ['Pre', 'Vid', 'M1', 'M2', 'M3'];
 
 	// Order of Phases for each module
 	var phases = {
-		'Pre':['login', 'avatar'],
+		'Pre':['avatar', 'start'],
+		'Vid': ['video'],
 		'M1': ['M1P1', 'M1P2', 'M1P3'],
 		'M2': ['M2P1', 'M2P2', 'M2P3'],
 		'M3': ['M3P1', 'M3P2'],
 	};
 
 	var phaseToStateMap = {
-		'login':  'main.login',
 		'avatar': 'main.avatar',
+		'start': 'main.start',
+		'video': 'main.video',
 	};
 
 	var moduleToStateMap = {
@@ -105,7 +107,28 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 			}
 
 			return null;
-		}
+		},
+
+		getNavLocationForLaunch: function() {
+			var lastLocation = this.getCurrentNavLocation();
+			if (lastLocation) {
+				// start screen
+				return new NavLocation(null, null, 'main.start');
+			} else {
+				// login
+				return new NavLocation(null, null, 'main.login');
+			}
+		},
+
+		getNextNavLocationForStartPage: function() {
+			var lastLocation = this.getCurrentNavLocation();
+
+			// When restarting, we go back to the beginning of the module
+			var modOnlyLocation = new NavLocation(lastLocation.module, null, null);
+			var nextLocation = this.getNextNavLocation( modOnlyLocation );
+
+			return nextLocation;
+		},
 	};
 }]);
 
