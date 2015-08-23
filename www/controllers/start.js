@@ -1,5 +1,11 @@
-angular.module('911-heroes.controllers', [])
+var controllers = angular.module('911-heroes.controllers', []);
 
-.controller('StartCtrl', function($scope) {
+controllers.controller('StartCtrl',  ['$scope', 'stateService', '$state', function($scope, stateService, $state) {
 
-});
+
+  $scope.onStartButtonClicked = function() {
+
+    var nextNavLocation = stateService.getNextNavLocationForStartPage();
+    $state.go(nextNavLocation.state);
+  };
+}]);
