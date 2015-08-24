@@ -17,7 +17,6 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		var nextNavLocation = stateService.getNextNavLocation();
 		$state.go(nextNavLocation.state);
 		stateService.setCurrentNavLocation(nextNavLocation);
-		updateCurrentPhase();
 
 		if(stateService.getCurrentNavLocation())
 		{
