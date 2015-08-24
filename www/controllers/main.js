@@ -6,19 +6,26 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 	var startNavLocation = stateService.getNavLocationForLaunch();
 	$state.go(startNavLocation.state);
 
-	$scope.goToNext = function() {
-		var nextNavLocation = stateService.getNextNavLocation();
-		$state.go(nextNavLocation.state);
-		stateService.setCurrentNavLocation(nextNavLocation);
-	};
-
-	$scope.selectedAvatar = avatarService.getAvatar();
-
+	// Convenience property for the current phase
 	$scope.currentPhase = null;
 	if(stateService.getCurrentNavLocation())
 	{
 		$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 	}
+
+	$scope.goToNext = function() {
+		var nextNavLocation = stateService.getNextNavLocation();
+		$state.go(nextNavLocation.state);
+		stateService.setCurrentNavLocation(nextNavLocation);
+		updateCurrentPhase();
+
+		if(stateService.getCurrentNavLocation())
+		{
+			$scope.currentPhase = stateService.getCurrentNavLocation().phase;
+		}
+	};
+
+	$scope.selectedAvatar = avatarService.getAvatar();
 
 	$scope.playAudio = function(audioSrc, audioElementId, callback) {
 		if(!audioElementId) { audioElementId="audioClip"; }

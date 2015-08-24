@@ -102,12 +102,14 @@ angular.module('911-heroes.controllers', [])
       $scope.scores[currentIndex] = { 'state':'fail' };
     }
 
-    if(currentIndex < currentScenarioSet.length - 1) {
-      currentIndex++;
+    if(currentIndex < (currentScenarioSet.length - 1)) {
+      currentIndex++; // This is in here to avoid potential "Index out of bounds", cause by fast clicking after the last scenario.
       $scope.scenario = currentScenarioSet[currentIndex];
       audioPrompt();
       visualPrompt();
       $scope.scores[currentIndex] = { 'state':'current' };
+    } else if (currentIndex === (currentScenarioSet.length - 1)) {
+      $scope.goToNext();
     }
   };
 
