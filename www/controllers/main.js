@@ -27,7 +27,7 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 
 	// Convenience property for the selected avatar
 	$scope.selectedAvatar = avatarService.getAvatar();
-	$scope.selectedAvatar = function(selectedAvatar) {
+	$scope.selectAvatar = function(selectedAvatar) {
 		avatarService.setAvatar(selectedAvatar);
 		$scope.selectedAvatar = selectedAvatar;
 	};
