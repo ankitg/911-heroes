@@ -55,11 +55,6 @@ for( var index = 1; index <= 6; index++) {
   ));
 }
 
-  $scope.selectAvatar = function(selectedAvatar) {
-    avatarService.setAvatar(selectedAvatar);
-    $scope.selectedAvatar = selectedAvatar;
-  };
-
   $scope.avatar_margin = function(index) {
     if ( index === 4 ) {
       return 'grid-3-push';

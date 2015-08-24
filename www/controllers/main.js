@@ -2,10 +2,6 @@ var controllers = angular.module('911-heroes.controllers', []);
 
 controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', function($scope, stateService, $state, avatarService) {
 
-	// On start, navigate to a specific page
-	var startNavLocation = stateService.getNavLocationForLaunch();
-	$state.go(startNavLocation.state);
-
 	// Convenience property for the current phase
 	$scope.currentPhase = null;
 	if(stateService.getCurrentNavLocation())
@@ -13,18 +9,28 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 	}
 
+	// On start, navigate to a specific page
+	var startNavLocation = stateService.getNavLocationForLaunch();
+	$state.go(startNavLocation.state);
+
 	$scope.goToNext = function() {
 		var nextNavLocation = stateService.getNextNavLocation();
 		$state.go(nextNavLocation.state);
 		stateService.setCurrentNavLocation(nextNavLocation);
 
+		// Update the convenience property
 		if(stateService.getCurrentNavLocation())
 		{
 			$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 		}
 	};
 
+	// Convenience property for the selected avatar
 	$scope.selectedAvatar = avatarService.getAvatar();
+	$scope.selectedAvatar = function(selectedAvatar) {
+		avatarService.setAvatar(selectedAvatar);
+		$scope.selectedAvatar = selectedAvatar;
+	};
 
 	$scope.playAudio = function(audioSrc, audioElementId, callback) {
 		if(!audioElementId) { audioElementId="audioClip"; }
