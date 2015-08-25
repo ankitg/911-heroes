@@ -94,10 +94,14 @@ angular.module('911-heroes.controllers', [])
   $scope.scenario = currentScenarioSet[currentIndex];
   visualPrompt();
 
-  var isFirstAttempt = true;
+  var isFirstAttempt = true; // Boolean to help determine if the question was answered correctly on the first attempt.
+  var correctCounter = 0; // Counter to keep track of correct answers and determine if >= 80% of the answers were correct.
   $scope.validateAnswer = function(answer) {
     if(answer === currentScenarioSet[currentIndex].is_emergency) {
-      if(isFirstAttempt) { $scope.scores[currentIndex] = { 'state':'pass' }; }
+      if(isFirstAttempt) {
+        $scope.scores[currentIndex] = { 'state':'pass' };
+        correctCounter++;
+      }
     }
     else {
       $scope.scores[currentIndex] = { 'state':'fail' };
@@ -113,7 +117,10 @@ angular.module('911-heroes.controllers', [])
       visualPrompt();
       $scope.scores[currentIndex] = { 'state':'current' };
     } else if (currentIndex === (currentScenarioSet.length - 1)) {
-      $scope.goToNext();
+      // Check if atleast 80% of the questions were answered correctly.
+      if(correctCounter >= (0.8 * currentScenarioSet.length)) {
+        $scope.goToNext();
+      }
     }
   };
 
