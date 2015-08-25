@@ -94,14 +94,18 @@ angular.module('911-heroes.controllers', [])
   $scope.scenario = currentScenarioSet[currentIndex];
   visualPrompt();
 
+  var isFirstAttempt = true;
   $scope.validateAnswer = function(answer) {
     if(answer === currentScenarioSet[currentIndex].is_emergency) {
-      $scope.scores[currentIndex] = { 'state':'pass' };
+      if(isFirstAttempt) { $scope.scores[currentIndex] = { 'state':'pass' }; }
     }
     else {
       $scope.scores[currentIndex] = { 'state':'fail' };
+      isFirstAttempt = false;
+      return;
     }
 
+    isFirstAttempt = true;
     if(currentIndex < (currentScenarioSet.length - 1)) {
       currentIndex++; // This is in here to avoid potential "Index out of bounds", cause by fast clicking after the last scenario.
       $scope.scenario = currentScenarioSet[currentIndex];
@@ -128,6 +132,9 @@ angular.module('911-heroes.controllers', [])
     {
       if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
       else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
+    }
+    else {
+      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
     }
   }
 
