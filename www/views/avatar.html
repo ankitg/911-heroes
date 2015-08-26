@@ -9,13 +9,13 @@
 
     <div ng-class="avatar_margin($index)" ng-repeat="avatar in avatars" class="grid-4">
       <label class="avatar-label" for="{{ avatar.name }}">
-        <img src="{{ avatar.hands_on_hips }}" alt="[image] avatar" width="100%">
+        <img ng-src="{{ avatar.hands_on_hips }}" alt="[image] avatar" width="100%">
         <input type="radio" id="{{ avatar.name }}" name="allAvatars" ng-value="avatar" ng-model="selectedAvatar" ng-click="$parent.selectAvatar(selectedAvatar)" >
       </label>
     </div>
 
     <div class="btn-wrap">
-      <button ng-class="{ buttonEnabled: selectedAvatar.name !== null}" ng-disable="selectedAvatar.name === null" type="button" class="btn btn-full" ui-sref="main.video">Continue
+      <button ng-class="{ buttonEnabled: selectedAvatar.name !== null}" ng-disable="selectedAvatar.name === null" type="button" class="btn btn-full" ng-click="goToNext()">Continue
         <svg ng-show="selectedAvatar.name !== null" class="svg-arrow-full" width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
           <g>
             <path fill="#fff" d="M117.8,80.3c0.2-0.2,0.3-0.3,0.4-0.5c0.1-0.1,0.1-0.2,0.2-0.3c0,0,0.1-0.1,0.1-0.1c0.9-1.2,1.5-2.8,1.5-4.5
@@ -30,6 +30,7 @@
     </div>
   </div>
 
+  <audio id="audioClip"/> <!-- Pick your Hero -->
 
   </ion-content>
 </ion-view>
