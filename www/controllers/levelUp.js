@@ -1,11 +1,21 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('LevelUpCtrl', function($scope, avatarService) {
+.controller('LevelUpCtrl', function($scope) {
 
-  $scope.selectedAvatar = avatarService.getAvatar();
+  $scope.phase_1 = $scope.phase_2 = $scope.level_up = false;
 
-  $scope.phase_1 = false;
-  $scope.phase_2 = false;
-  $scope.level_up = true;
+  if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M2P1" || $scope.currentPhase === "M3P1") {
+  	$scope.phase_1 = true;
+  	$scope.playAudio("Congratulations.mp3", null, $scope.goToNext());
+  } else if($scope.currentPhase === "M1P2" || $scope.currentPhase === "M2P2") {
+  	$scope.phase_2 = true;
+  	$scope.playAudio("Congratulations.mp3", null, $scope.goToNext());
+  } else if($scope.currentPhase === "M1P3" || $scope.currentPhase === "M2P3" || $scope.currentPhase === "M3P2") {	
+    $scope.level_up = true; 
+    $scope.playAudio("Congratulations.mp3", null, $scope.goToNext());
+  } else if($scope.currentPhase == "M4P1") {
+//  	$scope.level_up = true; 
+    $scope.playAudio("FinalCongratulations.mp3");
+  }
 
 });

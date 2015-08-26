@@ -95,6 +95,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     Module1
   \*  */
   .state('main.module1', {
+    cache: false,
     url: '/module1',
     views: {
       '@main': {
@@ -109,6 +110,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     Module2
   \*  */
   .state('main.module2', {
+    cache: false,
     url: '/module2',
     views: {
       '@main': {
@@ -123,6 +125,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     Module3
   \*  */
   .state('main.module3', {
+    cache: false,
     url: '/module3',
     views: {
       '@main': {
@@ -137,6 +140,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     LevelUp
   \*  */
   .state('main.levelUp', {
+    cache: false,
     url: '/levelUp',
     views: {
       '@main': {

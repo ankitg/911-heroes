@@ -1,6 +1,6 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('Module1Ctrl', function($scope) {
+.controller('Module1Ctrl', function($scope, $state) {
 
 
   var getNewScenarioSet = function() {
@@ -119,14 +119,16 @@ angular.module('911-heroes.controllers', [])
     } else if (currentIndex === (currentScenarioSet.length - 1)) {
       // Check if atleast 80% of the questions were answered correctly.
       if(correctCounter >= (0.8 * currentScenarioSet.length)) {
-        $scope.goToNext();
+        $state.go('main.levelUp');
+      } else {
+        // $state.go('main.tryAgain'); You failed :(
       }
     }
   };
 
   function audioPrompt() {
     // Add check for audio prompts
-    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2")
+    if($scope.currentPhase === "M1P1")
     {
       if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
       else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
@@ -145,7 +147,9 @@ angular.module('911-heroes.controllers', [])
     }
   }
 
-  $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);
+  if($scope.currentPhase === "M1P1") {
+    $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);
+  }
 
   $scope.scores = [
     {
