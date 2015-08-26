@@ -7700,6 +7700,9 @@ a.button {
 .has-error {
   color: #e12a2a; }
 
+.scroll {
+  height: 100%; }
+
 .btn-wrap {
   width: 80%;
   margin: 0 auto; }
@@ -7871,3 +7874,50 @@ input {
   width: 150px;
   display: block;
   margin: 100px auto 25px; }
+
+.lock-screen {
+  background-image: url('../img/lockscreen.png');
+  background-size: cover;
+  height: 640px;
+  width: 360px;
+  position: relative; }
+
+.emergency-call {
+  position: absolute;
+  bottom: 47px;
+  left: 117px;
+  background: transparent;
+  font-size: 17px;
+  color: #fff;
+  border: none;
+  letter-spacing: -0.005em; }
+
+.dialer-display {
+  top: 100px;
+  position: absolute;
+  left: 114px; }
+
+.dialer-wrap {
+  position: relative; }
+
+.dialer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+
+.button-row {
+  width: 100%;
+  margin: 0 auto; }
+
+.button-row .button-wrap {
+  width: 32.5%;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+  height: 50px;
+  vertical-align: middle; }
+
+.digit {
+  font-size: 26px;
+  background-color: transparent;
+  border: none; }
