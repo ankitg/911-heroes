@@ -3,7 +3,7 @@ var serviceModule = angular.module('911-heroes.services', []);
 serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 	// Order of Modules
-	var modules = ['Pre', 'Vid', 'M1', 'M2', 'M3'];
+	var modules = ['Pre', 'Vid', 'M1', 'M2', 'M3', 'M4'];
 
 	// Order of Phases for each module
 	var phases = {
@@ -12,6 +12,7 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 		'M1': ['M1P1', 'M1P2', 'M1P3'],
 		'M2': ['M2P1', 'M2P2', 'M2P3'],
 		'M3': ['M3P1', 'M3P2'],
+		'M4': ['M4P1'],
 	};
 
 	var phaseToStateMap = {
@@ -26,10 +27,11 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 		'M3': 'main.module3',
 	};
 
-	var NavLocation = function (module, phase, state) {
+	var NavLocation = function (module, phase, state, stateParams) {
 		this.module	= module;
 		this.phase 	= phase;
 		this.state	= state;
+		this.stateParams = stateParams;
 	};
 
 	function findState(module, phase) {
@@ -113,19 +115,27 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 			var lastLocation = this.getCurrentNavLocation();
 			if (lastLocation) {
 				// start screen
-				return new NavLocation(null, null, 'main.start');
+				return new NavLocation(null, null, 'main.start', {isLaunch: true});
 			} else {
 				// login
 				return new NavLocation(null, null, 'main.login');
 			}
 		},
 
-		getNextNavLocationForStartPage: function() {
-			var lastLocation = this.getCurrentNavLocation();
+		getNextNavLocationForStartPage: function(isLaunch) {
 
-			// When restarting, we go back to the beginning of the module
-			var modOnlyLocation = new NavLocation(lastLocation.module, null, null);
-			var nextLocation = this.getNextNavLocation( modOnlyLocation );
+			var nextLocation;
+
+			if (isLaunch) {
+				var lastLocation = this.getCurrentNavLocation();
+
+				// When restarting, we go back to the beginning of the module
+				var modOnlyLocation = new NavLocation(lastLocation.module, null, null);
+				nextLocation = this.getNextNavLocation( modOnlyLocation );
+
+			} else {
+				nextLocation = this.getNextNavLocation();
+			}
 
 			return nextLocation;
 		},

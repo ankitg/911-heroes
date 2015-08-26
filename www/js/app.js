@@ -53,7 +53,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     Start
   \*  */
   .state('main.start', {
-    url: '/start',
+    url: '/start?{isLaunch:bool}',
     views: {
       '@main': {
         templateUrl: 'views/start.html',

@@ -11,11 +11,11 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 
 	// On start, navigate to a specific page
 	var startNavLocation = stateService.getNavLocationForLaunch();
-	$state.go(startNavLocation.state);
+	$state.go(startNavLocation.state, startNavLocation.stateParams);
 
 	$scope.goToNext = function() {
 		var nextNavLocation = stateService.getNextNavLocation();
-		$state.go(nextNavLocation.state);
+		$state.go(nextNavLocation.state, startNavLocation.stateParams);
 		stateService.setCurrentNavLocation(nextNavLocation);
 
 		// Update the convenience property
