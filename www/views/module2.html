@@ -2,7 +2,7 @@
   <ion-content>
 
     <div ng-show="lockscreen" class="lock-screen">
-      <button class="emergency-call" ng-click="goToDialpad()">Emergency call</button>
+      <button id="emergencyCall" class="emergency-call" ng-click="goToDialpad()">Emergency call</button>
     </div>
 
     <div ng-show="!lockscreen">
@@ -80,6 +80,8 @@
         </div>
       </div>
     </div>
+
+  <audio id="audioClip"/>
 
   </ion-content>
 </ion-view>
