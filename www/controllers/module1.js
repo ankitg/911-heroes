@@ -152,37 +152,37 @@ angular.module('911-heroes.controllers', [])
   }
 
 
-  // $scope.scores = [
-  //   {
-  //     state: 'current'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   },
-  //   {
-  //     state: 'blank'
-  //   }
-  // ];
+  $scope.scores = [
+    {
+      state: 'current'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    },
+    {
+      state: 'blank'
+    }
+  ];
 
 });
