@@ -8,7 +8,7 @@ angular.module('911-heroes.controllers', [])
     $scope.lockscreen = false;
   };
 
-  if($scope.currentPhase === "M2P1") {
+  if($scope.currentPhase === "M2P1" && $scope.lockscreen) {
     $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt); // Now let's practice ...
     visualPrompt();
   }
@@ -37,5 +37,30 @@ angular.module('911-heroes.controllers', [])
       }
     }
   }
+
+  $scope.dialedNumber = "";
+  var keyCount = 0;
+
+  $scope.dialPadKeyPressed = function(key) {
+  	keyCount++;
+
+  	// Update the dial screen.
+  	if(key === "bksp") {
+		$scope.dialedNumber = $scope.dialedNumber.slice(0, - 1);
+  	} else if(key === "call") {
+  		if($scope.dialedNumber === "911") {
+  			console.log("Thank you for calling. GOODBYE!");
+  		}
+  	} else if(key === "contacts") {
+		console.log("Sorry. You have no friends. :(");
+  	} else {
+  	  	$scope.dialedNumber += key;
+  	}
+
+  	// Check for erroneous key presses.
+  	if((keyCount === 1 && key != "9") || (keyCount === 2 && key != "1") || (keyCount === 3 && key != "1") || (keyCount === 4 && key != "call")) {
+  		console.log("You made a boo boo :( … restart phase");
+  	}
+  };
 
 });
