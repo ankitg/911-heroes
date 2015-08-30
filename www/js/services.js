@@ -175,3 +175,39 @@ serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
   };
 
 }]);
+
+serviceModule.service('utilities', function() {
+	var flashing = {};
+
+	var flash = function(elementId, red, green, blue, interval) {
+		// Set the defaults
+		red 	 = typeof red 		!== 'undefined' ? red 	   : 0;
+		green 	 = typeof green 	!== 'undefined' ? green    : 255;
+		blue 	 = typeof blue 		!== 'undefined' ? blue 	   : 0;
+		interval = typeof interval 	!== 'undefined' ? interval : 10;
+
+		var ofs = 0;
+		var el = document.getElementById(elementId);
+	  	flashing[elementId] = window.setInterval(function(){
+		  el.style.background = 'rgba('+red+','+green+','+blue+','+Math.abs(Math.sin(ofs))+')';
+		  ofs += 0.01;
+		}, interval);
+	};
+
+	var unflash = function(elementId, red, green, blue, alpha) {
+		// Set the defaults
+		red   = typeof red 	 !== 'undefined' ? red 	 : 0;
+		green = typeof green !== 'undefined' ? green : 0;
+		blue  = typeof blue  !== 'undefined' ? blue  : 0;
+		alpha = typeof alpha !== 'undefined' ? alpha : 0;
+
+		window.clearInterval(flashing[elementId]);
+		var el = document.getElementById(elementId);
+		el.style.background = 'rgba('+red+','+green+','+blue+','+alpha+')';
+	};
+
+	return {
+		flash:   flash,
+		unflash: unflash
+	};
+});

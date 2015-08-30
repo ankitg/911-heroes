@@ -1,14 +1,16 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('Module2Ctrl', function($scope) {
+.controller('Module2Ctrl', function($scope, utilities) {
 
   $scope.lockscreen = true;
 
   $scope.goToDialpad = function() {
     $scope.lockscreen = false;
+    audioPrompt();
+    visualPrompt();
   };
 
-  if($scope.currentPhase === "M2P1" && $scope.lockscreen) {
+  if($scope.currentPhase === "M2P1") {
     $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt); // Now let's practice ...
     visualPrompt();
   }
@@ -19,6 +21,10 @@ angular.module('911-heroes.controllers', [])
     {
       if($scope.lockscreen) {
       	$scope.playAudio('PracticeDial911_2.mp3'); // Press the emergency call button
+      } else if (keyCount < 3) {
+      	$scope.playAudio('PracticeDial911_3.mp3'); // Press the green button
+      } else if (keyCount === 3) {
+      	$scope.playAudio('PracticeDial911_4.mp3'); // Press the call button
       }
     }
   }
@@ -28,14 +34,18 @@ angular.module('911-heroes.controllers', [])
     if($scope.currentPhase === "M2P1" || $scope.currentPhase === "M2P2")
     {
 	  if($scope.lockscreen) { // The code below adds a faded-blink to the emergency button.
-	  	var ofs = 0;
-		var el = document.getElementById('emergencyCall');
-	  	window.setInterval(function(){
-		  el.style.background = 'rgba(0,255,0,'+Math.abs(Math.sin(ofs))+')';
-		  ofs += 0.01;
-		}, 10);
+		utilities.flash('emergencyCall');
+      } else if (keyCount === 0) {
+      	utilities.unflash('emergencyCall');
+      	utilities.flash('nine');
+      } else if (keyCount === 1) {
+      	utilities.unflash('nine');
+      	utilities.flash('one');
+      } else if (keyCount === 3) {
+      	utilities.unflash('one');
+      	utilities.flash('call');
       }
-    }
+	}
   }
 
   $scope.dialedNumber = "";
@@ -43,6 +53,10 @@ angular.module('911-heroes.controllers', [])
 
   $scope.dialPadKeyPressed = function(key) {
   	keyCount++;
+
+  	// Promts
+  	audioPrompt();
+    visualPrompt();
 
   	// Update the dial screen.
   	if(key === "bksp") {
