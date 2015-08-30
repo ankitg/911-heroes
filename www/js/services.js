@@ -177,7 +177,12 @@ serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
 }]);
 
 serviceModule.service('utilities', function() {
-	var flashing = {};
+	// Keeps track of the flashing item (and related properties)
+	var flashing = {
+		// "element":"", 	// A handle to the element for resetting the background style.
+		// "background":"",	// A handle to the original background style of the element.
+		// "interval":""	// A handle to the interval so it may be cleared.
+	};
 
 	var flash = function(elementId, red, green, blue, interval) {
 		// Set the defaults
@@ -188,26 +193,30 @@ serviceModule.service('utilities', function() {
 
 		var ofs = 0;
 		var el = document.getElementById(elementId);
-	  	flashing[elementId] = window.setInterval(function(){
-		  el.style.background = 'rgba('+red+','+green+','+blue+','+Math.abs(Math.sin(ofs))+')';
-		  ofs += 0.01;
-		}, interval);
+
+		if(el) {
+			// Clear currently flashing item (if any)
+			clearFlashing();
+
+			flashing.element = el;
+			flashing.background = el.style.background;
+		  	flashing.interval = window.setInterval(function(){
+			  el.style.background = 'rgba('+red+','+green+','+blue+','+Math.abs(Math.sin(ofs))+')';
+			  ofs += 0.01;
+			}, interval);
+		}
 	};
 
-	var unflash = function(elementId, red, green, blue, alpha) {
-		// Set the defaults
-		red   = typeof red 	 !== 'undefined' ? red 	 : 0;
-		green = typeof green !== 'undefined' ? green : 0;
-		blue  = typeof blue  !== 'undefined' ? blue  : 0;
-		alpha = typeof alpha !== 'undefined' ? alpha : 0;
-
-		window.clearInterval(flashing[elementId]);
-		var el = document.getElementById(elementId);
-		el.style.background = 'rgba('+red+','+green+','+blue+','+alpha+')';
+	var clearFlashing = function() {
+		if(flashing.interval) {
+			window.clearInterval(flashing.interval);
+			flashing.element.style.background = flashing.background;
+			flashing = {};
+		}
 	};
 
 	return {
-		flash:   flash,
-		unflash: unflash
+		flash:			flash,
+		clearFlashing: 	clearFlashing
 	};
 });

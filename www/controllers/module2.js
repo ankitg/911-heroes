@@ -36,14 +36,13 @@ angular.module('911-heroes.controllers', [])
 	  if($scope.lockscreen) { // The code below adds a faded-blink to the emergency button.
 		utilities.flash('emergencyCall');
       } else if (keyCount === 0) {
-      	utilities.unflash('emergencyCall');
       	utilities.flash('nine');
       } else if (keyCount === 1) {
-      	utilities.unflash('nine');
       	utilities.flash('one');
       } else if (keyCount === 3) {
-      	utilities.unflash('one');
       	utilities.flash('call');
+      } else if (keyCount === 4) {
+      	utilities.clearFlashing();
       }
 	}
   }
