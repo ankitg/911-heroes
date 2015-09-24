@@ -121,7 +121,7 @@ angular.module('911-heroes.controllers', [])
       if(correctCounter >= (0.8 * currentScenarioSet.length)) {
         $state.go('main.levelUp');
       } else {
-        // $state.go('main.tryAgain'); You failed :(
+        $state.go('main.tryAgain'); // You failed :(
       }
     }
   };

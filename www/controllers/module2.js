@@ -1,6 +1,6 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('Module2Ctrl', function($scope, utilities) {
+.controller('Module2Ctrl', function($scope, $state, utilities) {
 
   $scope.lockscreen = true;
 
@@ -12,8 +12,8 @@ angular.module('911-heroes.controllers', [])
 
   if($scope.currentPhase === "M2P1") {
     $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt); // Now let's practice ...
-    visualPrompt();
   }
+  visualPrompt();
 
   function audioPrompt() {
     // Add check for audio prompts
@@ -21,30 +21,30 @@ angular.module('911-heroes.controllers', [])
     {
       if($scope.lockscreen) {
       	$scope.playAudio('PracticeDial911_2.mp3'); // Press the emergency call button
-      } else if (keyCount < 3) {
+      } else {
       	$scope.playAudio('PracticeDial911_3.mp3'); // Press the green button
-      } else if (keyCount === 3) {
-      	$scope.playAudio('PracticeDial911_4.mp3'); // Press the call button
       }
     }
   }
 
-  function visualPrompt() {
+  function visualPrompt(key) {
     // Add check for visual prompts
     if($scope.currentPhase === "M2P1" || $scope.currentPhase === "M2P2")
     {
-	  if($scope.lockscreen) { // The code below adds a faded-blink to the emergency button.
-		utilities.flash('emergencyCall');
-      } else if (keyCount === 0) {
+  	  if($scope.lockscreen) { // The code below adds a faded-blink to the emergency button.
+  	    utilities.flash('emergencyCall');
+      } else if ($scope.dialedNumber.length === 0) {
       	utilities.flash('nine');
-      } else if (keyCount === 1) {
+      } else if ($scope.dialedNumber.length === 1 && $scope.dialedNumber === "9") {
       	utilities.flash('one');
-      } else if (keyCount === 3) {
+      } else if ($scope.dialedNumber.length === 2 && $scope.dialedNumber === "91") {
+        utilities.flash('one');
+      } else if ($scope.dialedNumber.length === 3 && $scope.dialedNumber === "911" && key != "call") {
       	utilities.flash('call');
-      } else if (keyCount === 4) {
+      } else if ($scope.dialedNumber.length === 3 && $scope.dialedNumber === "911" && key === "call") {
       	utilities.clearFlashing();
       }
-	}
+  	}
   }
 
   $scope.dialedNumber = "";
@@ -53,27 +53,28 @@ angular.module('911-heroes.controllers', [])
   $scope.dialPadKeyPressed = function(key) {
   	keyCount++;
 
-  	// Promts
-  	audioPrompt();
-    visualPrompt();
-
   	// Update the dial screen.
   	if(key === "bksp") {
-		$scope.dialedNumber = $scope.dialedNumber.slice(0, - 1);
+		  $scope.dialedNumber = $scope.dialedNumber.slice(0, - 1);
   	} else if(key === "call") {
   		if($scope.dialedNumber === "911") {
   			console.log("Thank you for calling. GOODBYE!");
+        if(keyCount === 4) {
+          $state.go('main.levelUp');
+        } else {
+          $state.go('main.tryAgain'); // You failed :(
+        }
   		}
   	} else if(key === "contacts") {
-		console.log("Sorry. You have no friends. :(");
+		  console.log("Sorry. You have no friends. :(");
   	} else {
-  	  	$scope.dialedNumber += key;
+  	  $scope.dialedNumber += key;
   	}
 
-  	// Check for erroneous key presses.
-  	if((keyCount === 1 && key != "9") || (keyCount === 2 && key != "1") || (keyCount === 3 && key != "1") || (keyCount === 4 && key != "call")) {
-  		console.log("You made a boo boo :( … restart phase");
-  	}
+    // Promts
+    audioPrompt();
+    visualPrompt(key);
+
   };
 
 });
