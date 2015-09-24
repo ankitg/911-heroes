@@ -191,6 +191,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     border-radius: 7px;
   }
 
+//start screen
+.start-restartButton {
+  position: fixed;
+  bottom: 0;
+  left: 0; }
+
+
 //video
 .video-screen {
   display: block;

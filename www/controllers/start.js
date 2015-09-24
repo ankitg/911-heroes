@@ -8,4 +8,8 @@ controllers.controller('StartCtrl',  ['$scope', '$stateParams', 'stateService', 
     stateService.setCurrentNavLocation(nextNavLocation);
     $state.go(nextNavLocation.state, nextNavLocation.stateParams);
   };
+
+  $scope.onRestartButtonClicked = function() {
+    $scope.restart();
+  }
 }]);

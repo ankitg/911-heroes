@@ -2,6 +2,9 @@ var controllers = angular.module('911-heroes.controllers', []);
 
 controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', function($scope, stateService, $state, avatarService) {
 
+	// On start, navigate to a specific page
+	goToLaunchLocation();
+
 	// Convenience property for the current phase
 	$scope.currentPhase = null;
 	if(stateService.getCurrentNavLocation())
@@ -9,13 +12,9 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 	}
 
-	// On start, navigate to a specific page
-	var startNavLocation = stateService.getNavLocationForLaunch();
-	$state.go(startNavLocation.state, startNavLocation.stateParams);
-
 	$scope.goToNext = function() {
 		var nextNavLocation = stateService.getNextNavLocation();
-		$state.go(nextNavLocation.state, startNavLocation.stateParams);
+		$state.go(nextNavLocation.state, nextNavLocation.stateParams);
 		stateService.setCurrentNavLocation(nextNavLocation);
 
 		// Update the convenience property
@@ -23,6 +22,11 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		{
 			$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 		}
+	};
+
+	$scope.restart = function () {
+		window.localStorage.clear();
+		goToLaunchLocation();
 	};
 
 	// Convenience property for the selected avatar
@@ -44,5 +48,10 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 			audio.onended = function(){}; // Unset callback to avoid looping on chained playAudio events
 		}
 	};
+
+	function goToLaunchLocation() {
+		var startNavLocation = stateService.getNavLocationForLaunch();
+		$state.go(startNavLocation.state, startNavLocation.stateParams);
+	}
 
 }]);
