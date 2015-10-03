@@ -7844,14 +7844,18 @@ input {
   left: 2px;
   border-radius: 7px; }
 
-.svg_logo_noavatars {
-  width: 40%;
+.start-page-wrap {
+  padding: 10% 5%; }
+
+.svg-logo-title {
+  width: 90%;
+  height: 90%;
   margin: 0 auto;
   display: block; }
 
-.svg_play_button {
-  width: 30%;
-  margin: 0 auto;
+.svg-play-button {
+  width: 35%;
+  margin: 40px auto 20px;
   display: block; }
 
 .start-restartButton {
