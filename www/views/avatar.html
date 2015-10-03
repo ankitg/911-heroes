@@ -1,7 +1,7 @@
 <ion-view>
   <ion-content>
 
-  <div style="padding: 3%;">
+  <div class="avatar-page-wrap">
 
     <div class="selected-container">
       <img class="selected-avatar" src="{{ selectedAvatar.hands_on_hips }}" alt="[image] {{selectedAvatar.name}}" width="100">
@@ -14,7 +14,7 @@
       </label>
     </div>
 
-    <div class="btn-wrap">
+    <div class="btn-wrap-lg">
       <button ng-class="{ buttonEnabled: selectedAvatar.name !== null}" ng-disable="selectedAvatar.name === null" type="button" class="btn btn-full" ng-click="goToNext()">Continue
         <svg ng-show="selectedAvatar.name !== null" class="svg-arrow-full" width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
           <g>
