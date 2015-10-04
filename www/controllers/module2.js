@@ -19,11 +19,7 @@ angular.module('911-heroes.controllers', [])
     // Add check for audio prompts
     if($scope.currentPhase === "M2P1")
     {
-      if($scope.lockscreen) {
-      	$scope.playAudio('PracticeDial911_2.mp3'); // Press the emergency call button
-      } else {
       	$scope.playAudio('PracticeDial911_3.mp3'); // Press the green button
-      }
     }
   }
 
