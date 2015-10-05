@@ -2,7 +2,7 @@ angular.module('911-heroes.controllers', [])
 
 .controller('LevelUpCtrl', function($scope) {
 
-  // $scope.phase_1 = $scope.phase_2 = $scope.level_up = false;
+   $scope.phase_1 = $scope.phase_2 = $scope.level_up = false;
 
   if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M2P1" || $scope.currentPhase === "M3P1") {
   	$scope.phase_1 = true;

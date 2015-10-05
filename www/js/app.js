@@ -155,6 +155,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     TimeOut
   \*  */
   .state('main.timeOut', {
+    cache: false,
     url: '/timeOut',
     views: {
       '@main': {
@@ -169,6 +170,7 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     TryAgain
   \*  */
   .state('main.tryAgain', {
+    cache: false,
     url: '/tryAgain',
     views: {
       '@main': {
