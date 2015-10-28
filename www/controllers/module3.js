@@ -18,6 +18,17 @@ angular.module('911-heroes.controllers', [])
 
   moduleLogic();
 
+  function TTS(stringToBeSpoken, onSuccess){
+	if(window.TTS) {
+	  window.TTS.speak(stringToBeSpoken, function () {
+	    console.log("TTS: " + stringToBeSpoken);
+	    if(onSuccess) { onSuccess(); }
+	  }, function (reason) {
+	    console.error("TTS FAILED: " + reason);
+	  });
+	}
+  }
+
   function moduleLogic() {
 
     if($scope.video)   {}
@@ -35,7 +46,6 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt1() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        console.log("chosenScenarioCategoryIndex = " + chosenScenarioCategoryIndex);
         $scope.playAudio($scope.scenario.type+'.mp3', null, voiceInput1); // Fire / Ambulance / Police -- depending on the chosen scenario
       } else {
         voiceInput1();
@@ -57,7 +67,8 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt2() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        $scope.playAudio("Fire.mp3", null, voiceInput2); // Name of the current user
+      	// TODO: replace hardcoded value with value from localStorage
+		TTS("USER NAME", voiceInput2); // Name of the current user
       } else {
         voiceInput2();
       }
@@ -78,8 +89,8 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt3() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with TTS
-        $scope.playAudio("Fire.mp3", null, voiceInput3); // Addess of the current user
+        // TODO: replace hardcoded value with value from localStorage
+        TTS("USER ADDRESS", voiceInput3); // Addess of the current user
       } else {
         voiceInput3();
       }
@@ -101,8 +112,8 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt4() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with TTS
-        $scope.playAudio("Fire.mp3", null, voiceInput4); // Addess of the current user
+        // TODO: replace hardcoded value with ?
+        TTS("USER'S SITUATION", voiceInput4); // Situation of the current user
       } else {
         voiceInput4();
       }
@@ -125,8 +136,8 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt5() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with TTS
-        $scope.playAudio("Fire.mp3", null, voiceInput5); // Appropriate prompt unavailable :(
+        // TODO: replace hardcoded value with ?
+        TTS("Yes!", voiceInput5); // The user is always safe!
       } else {
         voiceInput5();
       }
@@ -149,8 +160,7 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt6() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with TTS
-        $scope.playAudio("Operator8.mp3", null, levelUp); // Appropriate prompt unavailable :(
+        $scope.playAudio("Operator8.mp3", null, levelUp);
       } else {
         levelUp();
       }
