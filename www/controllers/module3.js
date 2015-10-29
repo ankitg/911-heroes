@@ -29,6 +29,46 @@ angular.module('911-heroes.controllers', [])
 	}
   }
 
+  function recognizeSpeech() {
+    var maxMatches = 1;
+    var language = "en-US";
+    window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
+  }
+
+  function stopRecognition(){
+    window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+
+  }
+
+  function resultCallback (result){
+    console.log(result.results[0][0].transcript);
+  }
+
+  function errorCallback(error){
+    console.error(error);
+  }
+
+  // Show the list of the supported languages
+  function getSupportedLanguages() {
+    window.plugins.speechrecognizer.getSupportedLanguages(function(languages){
+      // display the json array
+      alert(languages);
+    }, function(error){
+      alert("Could not retrieve the supported languages : " + error);
+    });
+  }
+
+  // var recog = function() {
+  //   window.TTS.speak("START", function(){
+  //     console.log("RECOGING NOW");
+  //     setTimeout(recognizeSpeech, 3000);
+  //   }, function (reason) {
+  //     console.error("TTS FAILED: " + reason);
+  //   });
+  // };
+
+  // recog();
+
   function moduleLogic() {
 
     if($scope.video)   {}
