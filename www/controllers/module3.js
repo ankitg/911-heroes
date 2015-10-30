@@ -2,21 +2,28 @@ angular.module('911-heroes.controllers', [])
 
 .controller('Module3Ctrl', function($scope, $state, SCENARIOS) {
 
-  chooseScenario(); // Choose a new scenario everytime module 3 is loaded
-
   function chooseScenario() {
-    var chosenScenarioCategoryIndex = Math.floor(Math.random() * (SCENARIOS.length)); // Random index between 0 and SCENARIOS.length (which is one less than actual count, due it arrays being zero-indexed)
+    var chosenScenarioCategoryIndex = Math.floor(Math.random() * (SCENARIOS.length - 1)); // Random index between 0 and SCENARIOS.length (which is one more than actual index, due it arrays being zero-indexed)
     var chosenScenarioCategory = SCENARIOS[chosenScenarioCategoryIndex]; // Chosen category of scenarios, any but last - non-emergrncy
     var chosenScenarioIndex = Math.floor(Math.random() * (chosenScenarioCategory.length + 1)); // Index of chosen scenario with the chosen category
 
     $scope.scenario = chosenScenarioCategory[chosenScenarioIndex];
   }
 
-  $scope.video = false;
+  $scope.video   = true ;
   $scope.dialpad = false;
-  $scope.calling = true;
+  $scope.calling = false;
 
-  moduleLogic();
+  function transitionToCall() {
+  	chooseScenario(); // Choose a new scenario everytime module 3 is loaded
+  	window.setTimeout(callLogic, 5000);
+  }
+
+  transitionToCall();
+
+/*******/
+/* TTS */
+/*******/
 
   function TTS(stringToBeSpoken, onSuccess){
 	if(window.TTS) {
@@ -29,47 +36,47 @@ angular.module('911-heroes.controllers', [])
 	}
   }
 
-  function recognizeSpeech() {
-    var maxMatches = 1;
+  function voicePrompt(filename, func) {
+  	// Add check for audio prompts
+	if ($scope.currentPhase === "M3P1") {
+	  $scope.playAudio(filename, null, func);
+	} else {
+	  func();
+	}
+  }
+
+/*********************/
+/* Voice Recognition */
+/*********************/
+
+  function startRecognition() {
+  	var maxMatches = 1;
     var language = "en-US";
     window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
   }
 
-  function stopRecognition(){
-    window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
-
+  function stopRecognition(successCallback){
+  	if(successCallback === undefined) {successCallback = resultCallback;}
+    window.plugins.speechrecognizer.stop(successCallback, errorCallback);
   }
 
   function resultCallback (result){
-    console.log(result.results[0][0].transcript);
+  	if(result && result.results) {console.log(result.results[0][0].transcript);}
   }
 
   function errorCallback(error){
     console.error(error);
   }
 
-  // Show the list of the supported languages
-  function getSupportedLanguages() {
-    window.plugins.speechrecognizer.getSupportedLanguages(function(languages){
-      // display the json array
-      alert(languages);
-    }, function(error){
-      alert("Could not retrieve the supported languages : " + error);
-    });
-  }
+/****************/
+/* Module Logic */
+/****************/
 
-  // var recog = function() {
-  //   window.TTS.speak("START", function(){
-  //     console.log("RECOGING NOW");
-  //     setTimeout(recognizeSpeech, 3000);
-  //   }, function (reason) {
-  //     console.error("TTS FAILED: " + reason);
-  //   });
-  // };
+  function callLogic() {
 
-  // recog();
-
-  function moduleLogic() {
+  	$scope.video   = false;
+    $scope.dialpad = false;
+    $scope.calling = true ;
 
     if($scope.video)   {}
     if($scope.dialpad) {} // No dialpad on module 3.
@@ -84,18 +91,21 @@ angular.module('911-heroes.controllers', [])
     }
 
     function voicePrompt1() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-        $scope.playAudio($scope.scenario.type+'.mp3', null, voiceInput1); // Fire / Ambulance / Police -- depending on the chosen scenario
-      } else {
-        voiceInput1();
-      }
+      voicePrompt ($scope.scenario.type+'.mp3', voiceInput1);
     }
 
     function voiceInput1() {
-      // TODO: voice recognition
-      console.log("Do voice recog. here for the type of emergency");
-      setTimeout(Operator2, 3000);
+      startRecognition();
+      setTimeout(stopRecognition1, 3000);
+    }
+
+    function stopRecognition1() {
+      stopRecognition(voiceRecog1);
+    }
+
+    function voiceRecog1(result) {
+      console.log("You said " + result.results[0][0].transcript);
+      Operator2();
     }
 
 
