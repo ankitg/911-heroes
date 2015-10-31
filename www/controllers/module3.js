@@ -2,24 +2,25 @@ angular.module('911-heroes.controllers', [])
 
 .controller('Module3Ctrl', function($scope, $state, SCENARIOS) {
 
-  function chooseScenario() {
-    var chosenScenarioCategoryIndex = Math.floor(Math.random() * (SCENARIOS.length - 1)); // Random index between 0 and SCENARIOS.length (which is one more than actual index, due it arrays being zero-indexed)
-    var chosenScenarioCategory = SCENARIOS[chosenScenarioCategoryIndex]; // Chosen category of scenarios, any but last - non-emergrncy
-    var chosenScenarioIndex = Math.floor(Math.random() * (chosenScenarioCategory.length + 1)); // Index of chosen scenario with the chosen category
-
-    $scope.scenario = chosenScenarioCategory[chosenScenarioIndex];
-  }
-
-  $scope.video   = true ;
-  $scope.dialpad = false;
-  $scope.calling = false;
-
   function transitionToCall() {
   	chooseScenario(); // Choose a new scenario everytime module 3 is loaded
   	window.setTimeout(callLogic, 5000);
   }
 
   transitionToCall();
+
+  function chooseScenario() {
+    var chosenScenarioCategoryIndex = Math.floor(Math.random() * (SCENARIOS.length - 1)); // Random index between 0 and SCENARIOS.length (which is one more than actual index, due it arrays being zero-indexed)
+    var chosenScenarioCategory = SCENARIOS[chosenScenarioCategoryIndex]; // Chosen category of scenarios, any but last - non-emergrncy
+    var chosenScenarioIndex = Math.floor(Math.random() * (chosenScenarioCategory.length + 1)); // Index of chosen scenario with the chosen category
+
+    $scope.scenario = chosenScenarioCategory[chosenScenarioIndex];
+    console.log($scope.scenario);
+  }
+
+  $scope.video   = true ;
+  $scope.dialpad = false;
+  $scope.calling = false;
 
 /*******/
 /* TTS */
@@ -55,17 +56,27 @@ angular.module('911-heroes.controllers', [])
     window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
   }
 
-  function stopRecognition(successCallback){
+  function stopRecognition(successCallback, failureCallback) {
   	if(successCallback === undefined) {successCallback = resultCallback;}
-    window.plugins.speechrecognizer.stop(successCallback, errorCallback);
+  	if(failureCallback === undefined) {failureCallback = errorCallback ;}
+    window.plugins.speechrecognizer.stop(successCallback, failureCallback);
   }
 
-  function resultCallback (result){
+  function resultCallback(result) {
   	if(result && result.results) {console.log(result.results[0][0].transcript);}
   }
 
-  function errorCallback(error){
+  function errorCallback(error) {
     console.error(error);
+  }
+
+  function voiceInput(success, failure, next) {
+  	if(window.plugins && window.plugins.speechrecognizer) {
+  	  startRecognition();
+  	  setTimeout(function(){stopRecognition(success,failure);}, 3000);
+  	} else {
+  	  next();
+  	}
   }
 
 /****************/
@@ -80,31 +91,26 @@ angular.module('911-heroes.controllers', [])
 
     if($scope.video)   {}
     if($scope.dialpad) {} // No dialpad on module 3.
-    if($scope.calling) { $scope.playAudio('Operator1.mp3', null, phoneRing); } // Now hold the phone to your ear
 
-    function phoneRing() {
-      $scope.playAudio('PhoneRinging.mp3', null, Operator1); // Ring ring
-    }
-
-    function Operator1() {
-      $scope.playAudio('Operator2.mp3', null, voicePrompt1); // Do you need fire, ambulance or police?
-    }
-
-    function voicePrompt1() {
-      voicePrompt ($scope.scenario.type+'.mp3', voiceInput1);
-    }
-
-    function voiceInput1() {
-      startRecognition();
-      setTimeout(stopRecognition1, 3000);
-    }
-
-    function stopRecognition1() {
-      stopRecognition(voiceRecog1);
+    if($scope.calling) {
+      $scope.playAudio('Operator1.mp3', null, function() { // Now hold the phone to your ear
+    	$scope.playAudio('PhoneRinging.mp3', null, function() { // Ring ring
+    	  $scope.playAudio('Operator2.mp3', null, function() { // Do you need fire, ambulance or police?
+    	  	voicePrompt ($scope.scenario.type+'.mp3', function(){
+    	  	  voiceInput(voiceRecog1,errorCallback,Operator2);
+    	  	});
+    	  });
+    	});
+      });
     }
 
     function voiceRecog1(result) {
-      console.log("You said " + result.results[0][0].transcript);
+      var recognizedText = result.results[0][0].transcript;
+      console.log("You said " + recognizedText);
+      if(recognizedText.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
+      	// We found what we were looking for in what you said!
+      	console.log("\""+recognizedText+"\" does contain \""+$scope.scenario.type+"\"");
+      }
       Operator2();
     }
 
