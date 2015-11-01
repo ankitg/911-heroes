@@ -27,6 +27,14 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 		'M3': 'main.module3',
 	};
 
+	/**
+	 * Represents a navigation location by the modules and phases.
+	 * 'Modules' are sections of the app, often a specific learning activity.
+	 * 'Phases' are the various levels within a module (ex. increasing difficulties)
+	 *
+	 * These are related to angular's routing system using the state and stateParams.
+	 * @constructor
+	 */
 	var NavLocation = function (module, phase, state, stateParams) {
 		this.module	= module;
 		this.phase 	= phase;
@@ -139,6 +147,39 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 			return nextLocation;
 		},
+
+		/**
+		 * Returns a NavLocation pointing to the phase that occurs before navLocation in its module.
+		 * Returns the same phase as navLocation if it is the first phase in that module.
+		 *
+		 * @param {NavLocation=} navLocation - If undefined, will use location defined by `getCurrentNavLocation`
+		 * @returns {NavLocation}
+		 * */
+		getNavLocationForPreviousPhase: function (navLocation) {
+
+			if (!navLocation) {
+				// Find Saved
+				navLocation = this.getCurrentNavLocation();
+			}
+
+			var modPhases = phases[navLocation.module];
+
+			var phaseIndex = modPhases.indexOf(navLocation.phase);
+
+			if (phaseIndex > 0) {
+				// Return previous phase
+				var prevPhase = modPhases[phaseIndex - 1];
+				var state = findState(navLocation.module, prevPhase);
+				return new NavLocation(navLocation.module, prevPhase, state);
+			} else {
+				// Return current phase, because it is the first
+				return navLocation;
+			}
+		},
+
+		getNavLocationForTimeoutPage: function() {
+			return new NavLocation(null, null, 'main.timeOut', null);
+		},
 	};
 }]);
 
@@ -174,6 +215,87 @@ serviceModule.service('avatarService', ['STORAGE', function(STORAGE) {
   	getAvatar: getAvatar
   };
 
+}]);
+
+serviceModule.service('idleTimer', ['$interval', function ($interval) {
+
+	/**
+	 * Callback for idle timer.
+	 * @callback IdleTimer~callback
+	 * @param {number} [consecutiveCallbackCount] - Number of consecutive times that callback has fired without a nudge
+	 */
+
+	/**
+	 * Idle Timer. Calls back a function if a given duration has passed without being nudged. Starts automatically when
+	 * instantiated.
+	 *
+	 * @param {IdleTimer~callback} callback
+	 * @param {number}[duration=15] - seconds of inactivity before callback is triggered
+	 * @param {boolean}[shouldStopOnCallback=false] - if true, timer will be stopped upon first callback
+	 * @constructor
+	 */
+	var IdleTimer = function(callback, duration, shouldStopOnCallback) {
+
+		//== PUBLIC
+
+		this.stop = function() {
+			$interval.cancel(timer);
+		};
+
+		this.nudge = function() {
+			idleTime = 0;
+			consecutiveCallbackCount = 0;
+		}
+
+		//== PRIVATE
+
+		var idleTime = 0;
+
+		/** Number of consecutive times that callback has fired without a nudge. */
+		var consecutiveCallbackCount = 0; //
+		var timer;
+
+		if(!duration) {
+			duration = 15;
+		}
+
+		if(!shouldStopOnCallback) {
+			shouldStopOnCallback = false;
+		}
+
+		timer = $interval(onTimerTicked, 1000, 0, false);
+
+		// save `this` as a variable so it can be passed into the scope of `onTimerTicked`
+		var context = this;
+
+		function onTimerTicked() {
+
+			idleTime++;
+
+			if(idleTime >= duration) {
+
+				// reset timer
+				idleTime = 0;
+
+				if(shouldStopOnCallback) {
+					context.stop();
+				}
+
+				if(callback) {
+					callback(consecutiveCallbackCount);
+					consecutiveCallbackCount++;
+				}
+			}
+		}
+	}
+
+	return {
+
+		/**
+		 * Idle Timer object. Use `new` to create a new one.
+		 */
+		IdleTimer: IdleTimer,
+	};
 }]);
 
 serviceModule.service('utilities', function() {
