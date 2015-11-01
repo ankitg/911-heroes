@@ -1,9 +1,21 @@
 angular.module('911-heroes.controllers', [])
 
-.controller('Module3Ctrl', function($scope, $state, SCENARIOS) {
+.controller('Module3Ctrl', function($scope, $state, SCENARIOS, STORAGE) {
+
+  var currentUser = window.localStorage.getItem(STORAGE.CURRENT_USER);
 
   function transitionToCall() {
   	chooseScenario(); // Choose a new scenario everytime module 3 is loaded
+
+  	if (currentUser) {
+	  currentUser = JSON.parse(currentUser);
+  	} else {
+  	  currentUser = {
+  		"name":"The Nit Man",
+  		"address":"257 Adelaide Street West"
+  	  };
+  	}
+
   	window.setTimeout(callLogic, 5000);
   }
 
@@ -12,10 +24,12 @@ angular.module('911-heroes.controllers', [])
   function chooseScenario() {
     var chosenScenarioCategoryIndex = Math.floor(Math.random() * (SCENARIOS.length - 1)); // Random index between 0 and SCENARIOS.length (which is one more than actual index, due it arrays being zero-indexed)
     var chosenScenarioCategory = SCENARIOS[chosenScenarioCategoryIndex]; // Chosen category of scenarios, any but last - non-emergrncy
-    var chosenScenarioIndex = Math.floor(Math.random() * (chosenScenarioCategory.length + 1)); // Index of chosen scenario with the chosen category
+    var chosenScenarioIndex = Math.floor(Math.random() * (chosenScenarioCategory.length)); // Index of chosen scenario with the chosen category
 
     $scope.scenario = chosenScenarioCategory[chosenScenarioIndex];
-    console.log($scope.scenario);
+    // console.log(chosenScenarioCategoryIndex + ": should be 0, 1 or 2.");
+    // console.log(chosenScenarioIndex + ": should be less than " + chosenScenarioCategory.length);
+    // console.log($scope.scenario);
   }
 
   $scope.video   = true ;
@@ -34,15 +48,8 @@ angular.module('911-heroes.controllers', [])
 	  }, function (reason) {
 	    console.error("TTS FAILED: " + reason);
 	  });
-	}
-  }
-
-  function voicePrompt(filename, func) {
-  	// Add check for audio prompts
-	if ($scope.currentPhase === "M3P1") {
-	  $scope.playAudio(filename, null, func);
 	} else {
-	  func();
+	  onSuccess();
 	}
   }
 
@@ -79,6 +86,28 @@ angular.module('911-heroes.controllers', [])
   	}
   }
 
+/*****************/
+/* Audio Prompts */
+/*****************/
+
+  promptType = {
+    AUDIO : 0,
+    TTS : 1
+  };
+
+  function voicePrompt(prompttype, filenameORprompttext, func) {
+  	// Add check for audio prompts
+	if ($scope.currentPhase === "M3P1") {
+	  if(prompttype === promptType.AUDIO) {
+	  	$scope.playAudio(filenameORprompttext, null, func);
+	  } else if(prompttype === promptType.TTS) {
+	  	TTS(filenameORprompttext, func);
+	  }
+	} else {
+	  func();
+	}
+  }
+
 /****************/
 /* Module Logic */
 /****************/
@@ -89,20 +118,15 @@ angular.module('911-heroes.controllers', [])
     $scope.dialpad = false;
     $scope.calling = true ;
 
-    if($scope.video)   {}
-    if($scope.dialpad) {} // No dialpad on module 3.
-
-    if($scope.calling) {
-      $scope.playAudio('Operator1.mp3', null, function() { // Now hold the phone to your ear
-    	$scope.playAudio('PhoneRinging.mp3', null, function() { // Ring ring
-    	  $scope.playAudio('Operator2.mp3', null, function() { // Do you need fire, ambulance or police?
-    	  	voicePrompt ($scope.scenario.type+'.mp3', function(){
-    	  	  voiceInput(voiceRecog1,errorCallback,Operator2);
-    	  	});
-    	  });
-    	});
-      });
-    }
+	$scope.playAudio('Operator1.mp3', null, function() { // Now hold the phone to your ear
+	  $scope.playAudio('PhoneRinging.mp3', null, function() { // Ring ring
+	  	$scope.playAudio('Operator2.mp3', null, function() { // Do you need fire, ambulance or police?
+	  	  voicePrompt (promptType.AUDIO, $scope.scenario.type+'.mp3', function(){
+	  	  	voiceInput(voiceRecog1,errorCallback,Operator2);
+	  	  });
+	  	});
+	  });
+	});
 
     function voiceRecog1(result) {
       var recognizedText = result.results[0][0].transcript;
@@ -117,17 +141,11 @@ angular.module('911-heroes.controllers', [])
 
 
     function Operator2() {
-      $scope.playAudio('Operator3.mp3', null, voicePrompt2); // What is your name?
-    }
-
-    function voicePrompt2() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-      	// TODO: replace hardcoded value with value from localStorage
-		TTS("USER NAME", voiceInput2); // Name of the current user
-      } else {
-        voiceInput2();
-      }
+      $scope.playAudio('Operator3.mp3', null, function(){ // What is your name?
+      	voicePrompt (promptType.TTS, currentUser.name.toString(), function(){ // Name of the current user
+	  	  	voiceInput2();
+	  	  });
+      });
     }
 
    function voiceInput2() {
@@ -146,7 +164,7 @@ angular.module('911-heroes.controllers', [])
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
         // TODO: replace hardcoded value with value from localStorage
-        TTS("USER ADDRESS", voiceInput3); // Addess of the current user
+        TTS(currentUser.address, voiceInput3); // Addess of the current user
       } else {
         voiceInput3();
       }
