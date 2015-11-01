@@ -5,8 +5,7 @@ controllers.controller('StartCtrl',  ['$scope', '$stateParams', 'stateService', 
   $scope.onStartButtonClicked = function() {
 
     var nextNavLocation = stateService.getNextNavLocationForStartPage($stateParams.isLaunch);
-    stateService.setCurrentNavLocation(nextNavLocation);
-    $state.go(nextNavLocation.state, nextNavLocation.stateParams);
+    $scope.goToNavLocation(nextNavLocation);
   };
 
   $scope.onRestartButtonClicked = function() {

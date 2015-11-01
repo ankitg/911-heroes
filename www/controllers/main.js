@@ -2,26 +2,60 @@ var controllers = angular.module('911-heroes.controllers', []);
 
 controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', function($scope, stateService, $state, avatarService) {
 
-	// On start, navigate to a specific page
-	goToLaunchLocation();
-
-	// Convenience property for the current phase
+	/**
+	 * Convenience property for the current phase. Set during navigation.
+	 */
 	$scope.currentPhase = null;
-	if(stateService.getCurrentNavLocation())
-	{
-		$scope.currentPhase = stateService.getCurrentNavLocation().phase;
-	}
 
 	$scope.goToNext = function() {
 		var nextNavLocation = stateService.getNextNavLocation();
-		$state.go(nextNavLocation.state, nextNavLocation.stateParams);
-		stateService.setCurrentNavLocation(nextNavLocation);
+		$scope.goToNavLocation(nextNavLocation);
+	};
+
+	/**
+	 * @function
+	 *
+	 * Used to navigate to a navLocation. Using this function will set the currentNavLocation and will also update
+	 * `$scope.currentPhase`.
+	 *
+	 * @param navLocation {NavLocation}
+	 */
+	$scope.goToNavLocation = function(navLocation) {
+
+		stateService.setCurrentNavLocation(navLocation);
 
 		// Update the convenience property
 		if(stateService.getCurrentNavLocation())
 		{
 			$scope.currentPhase = stateService.getCurrentNavLocation().phase;
 		}
+
+		$state.go(navLocation.state, navLocation.stateParams);
+	};
+
+	/**
+	 * @function
+	 *
+	 * Used to navigate to a navLocation which shouldn't be tracked as part of the progress of the game. Example include,
+	 * timeOut pages and launch pages.
+	 *
+	 * @param navLocation {NavLocation}
+	 */
+	$scope.goToUntrackedNavLocation = function(navLocation) {
+
+		$scope.currentPhase = null;
+
+		$state.go(navLocation.state, navLocation.stateParams);
+	};
+
+	$scope.goToTimeoutScreen = function() {
+		var navLocation = stateService.getNavLocationForTimeoutPage();
+		$scope.goToUntrackedNavLocation(navLocation);
+	};
+
+	function goToLaunchLocation() {
+		var startNavLocation = stateService.getNavLocationForLaunch();
+		$scope.goToUntrackedNavLocation(startNavLocation);
 	};
 
 	$scope.restart = function () {
@@ -49,9 +83,7 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		}
 	};
 
-	function goToLaunchLocation() {
-		var startNavLocation = stateService.getNavLocationForLaunch();
-		$state.go(startNavLocation.state, startNavLocation.stateParams);
-	}
+	// On start, navigate to a specific page
+	goToLaunchLocation();
 
 }]);
