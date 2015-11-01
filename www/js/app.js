@@ -137,6 +137,21 @@ angular.module('911-heroes', ['ionic', '911-heroes.controllers', '911-heroes.ser
     }
   })
   /*  *\
+    Module4
+  \*  */
+  .state('main.module4', {
+    cache: false,
+    url: '/module4',
+    views: {
+      '@main': {
+        templateUrl: 'views/module4.html',
+        resolve: {
+        },
+        controller: 'Module4Ctrl'
+      }
+    }
+  })
+  /*  *\
     LevelUp
   \*  */
   .state('main.levelUp', {
