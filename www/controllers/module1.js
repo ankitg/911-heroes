@@ -1,7 +1,43 @@
-angular.module('911-heroes.controllers', [])
+var controllers = angular.module('911-heroes.controllers', []);
 
-.controller('Module1Ctrl', function($scope, $state, SCENARIOS) {
+controllers.controller('Module1Ctrl', function($scope, $state, SCENARIOS, idleTimer) {
 
+  var timer;
+
+  $scope.$on('$ionicView.enter', function() {
+
+    // No timer for phase 1
+    if($scope.currentPhase !== 'M1P1') {
+      timer = new idleTimer.IdleTimer(promptOnIdle, 5);
+    }
+  });
+
+  $scope.$on('$ionicView.leave', function() {
+
+    if(timer) {
+      timer.stop();
+      timer = null;
+    }
+  });
+
+  function promptOnIdle(consecutiveCallbackCount) {
+
+    switch(consecutiveCallbackCount) {
+      case 0:
+        audioPrompt(true);
+        visualPrompt(true);
+        break;
+
+      case 1:
+        timer.stop();
+        $scope.goToTimeoutScreen();
+        break;
+
+      default:
+        // NO-OP
+        console.log("Warning: should not reach here");
+    }
+  }
 
   var getNewScenarioSet = function() {
     var scenarios = SCENARIOS;
@@ -55,6 +91,12 @@ angular.module('911-heroes.controllers', [])
   var isFirstAttempt = true; // Boolean to help determine if the question was answered correctly on the first attempt.
   var correctCounter = 0; // Counter to keep track of correct answers and determine if >= 80% of the answers were correct.
   $scope.validateAnswer = function(answer) {
+
+    // track user activity
+    if(timer) {
+      timer.nudge();
+    }
+
     if(answer === currentScenarioSet[currentIndex].is_emergency) {
       if(isFirstAttempt) {
         $scope.scores[currentIndex] = { 'state':'pass' };
@@ -84,18 +126,18 @@ angular.module('911-heroes.controllers', [])
     }
   };
 
-  function audioPrompt() {
+  function audioPrompt(isReprompt) {
     // Add check for audio prompts
-    if($scope.currentPhase === "M1P1")
+    if($scope.currentPhase === "M1P1" || (isReprompt && $scope.currentPhase === "M1P2"))
     {
       if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
       else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
     }
   }
 
-  function visualPrompt() {
+  function visualPrompt(isReprompt) {
     // Add check for visual prompts
-    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2")
+    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2" || (isReprompt && $scope.currentPhase === "M1P3"))
     {
       if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
       else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
