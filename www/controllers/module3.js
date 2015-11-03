@@ -166,7 +166,6 @@ angular.module('911-heroes.controllers', [])
     function voicePrompt3() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with value from localStorage
         TTS(currentUser.address, voiceInput3); // Addess of the current user
       } else {
         voiceInput3();
