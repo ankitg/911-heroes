@@ -16,20 +16,20 @@
   				<input type="text" name="street_num" placeholder="123" ng-model="street_num" required>
   			</label>
         <p class="has-error" ng-show="(loginForm.street_num.$invalid && submitted)">Street # is required</p>
-  			
+
         <label class="item item-input item-stacked-label">
   				<span class="input-label">Street Name <i class="asterisk"></i></span>
   				<input type="text" name="street_name" placeholder="Adelaide Street" ng-model="street_name" required>
   			</label>
         <p class="has-error" ng-show="(loginForm.street_name.$invalid && submitted)">Street Name is required</p>
-  			
+
         <label class="item item-input item-stacked-label">
   				<span class="input-label">Unit #</span>
   				<input type="text" placeholder="101">
   			</label>
-  			
+
         <div class="login-footnote"><i class="asterisk"></i> Mandatory</div>
-  			
+
         <button ng-class="{ buttonEnabled: loginForm.name.$valid && loginForm.street_num.$valid && loginForm.street_name.$valid }" ng-disabled="loginForm.name.$invalid || loginForm.street_num.$invalid || loginForm.street_name.$invalid" type="button" class="btn btn-full" ng-click="submitForm(loginForm.$valid)">Continue
           <svg ng-show="loginForm.name.$valid && loginForm.street_num.$valid && loginForm.street_name.$valid" class="svg-arrow-full" width="23px" height="23px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
             <g>
