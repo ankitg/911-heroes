@@ -8,7 +8,7 @@ controllers.controller('Module1Ctrl', function($scope, $state, SCENARIOS, idleTi
 
     // No timer for phase 1
     if($scope.currentPhase !== 'M1P1') {
-      timer = new idleTimer.IdleTimer(promptOnIdle, 5);
+      timer = new idleTimer.IdleTimer(promptOnIdle, 15);
     }
   });
 
@@ -24,8 +24,10 @@ controllers.controller('Module1Ctrl', function($scope, $state, SCENARIOS, idleTi
 
     switch(consecutiveCallbackCount) {
       case 0:
-        audioPrompt(true);
-        visualPrompt(true);
+        $scope.$apply(function() {
+          audioPrompt(true);
+          visualPrompt(true);
+        });
         break;
 
       case 1:
