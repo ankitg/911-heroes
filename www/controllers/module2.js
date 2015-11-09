@@ -1,6 +1,8 @@
-angular.module('911-heroes.controllers', [])
 
-.controller('Module2Ctrl', function($scope, $state, utilities) {
+function Module2Ctrl($scope, $state, utilities, idleTimer) {
+
+  // See after the constructor for rest of inheritance pattern
+  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
   $scope.lockscreen = true;
 
@@ -72,5 +74,11 @@ angular.module('911-heroes.controllers', [])
     visualPrompt(key);
 
   };
+};
 
-});
+
+Module2Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
+Module2Ctrl.prototype.constructor = Module2Ctrl;
+
+var controllers = angular.module('911-heroes.controllers', []);
+controllers.controller('Module2Ctrl', Module2Ctrl);

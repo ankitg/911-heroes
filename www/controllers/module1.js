@@ -1,8 +1,9 @@
-var controllers = angular.module('911-heroes.controllers', []);
 
-controllers.controller('Module1Ctrl', function($scope, $state, SCENARIOS, idleTimer) {
+function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
 
   var timer;
+  // See after the constructor for rest of inheritance pattern
+  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
   $scope.$on('$ionicView.enter', function() {
 
@@ -187,4 +188,10 @@ controllers.controller('Module1Ctrl', function($scope, $state, SCENARIOS, idleTi
     }
   ];
 
-});
+};
+
+Module1Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
+Module1Ctrl.prototype.constructor = Module1Ctrl;
+
+var controllers = angular.module('911-heroes.controllers', []);
+controllers.controller('Module1Ctrl', Module1Ctrl);

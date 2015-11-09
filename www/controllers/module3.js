@@ -1,6 +1,8 @@
-angular.module('911-heroes.controllers', [])
 
-.controller('Module3Ctrl', function($scope, $state, SCENARIOS, STORAGE) {
+function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
+
+  // See after the constructor for rest of inheritance pattern
+  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
   var currentUser = window.localStorage.getItem(STORAGE.CURRENT_USER);
 
@@ -246,4 +248,10 @@ angular.module('911-heroes.controllers', [])
 
   }
 
-});
+};
+
+Module3Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
+Module3Ctrl.prototype.constructor = Module3Ctrl;
+
+var controllers = angular.module('911-heroes.controllers', []);
+controllers.controller('Module3Ctrl', Module3Ctrl);
