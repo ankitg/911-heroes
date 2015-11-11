@@ -1,44 +1,30 @@
 
 function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
 
-  var timer;
   // See after the constructor for rest of inheritance pattern
   BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
-  $scope.$on('$ionicView.enter', function() {
+  // override
+  $scope.audioPrompt = function (isReprompt) {
 
-    // No timer for phase 1
-    if($scope.currentPhase !== 'M1P1') {
-      timer = new idleTimer.IdleTimer(promptOnIdle, 15);
+    // Add check for audio prompts
+    if($scope.currentPhase === "M1P1" || (isReprompt && $scope.currentPhase === "M1P2"))
+    {
+      if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
+      else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
     }
-  });
+  }
 
-  $scope.$on('$ionicView.leave', function() {
-
-    if(timer) {
-      timer.stop();
-      timer = null;
+  // override
+  $scope.visualPrompt = function(isReprompt) {
+    // Add check for visual prompts
+    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2" || (isReprompt && $scope.currentPhase === "M1P3"))
+    {
+      if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
+      else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
     }
-  });
-
-  function promptOnIdle(consecutiveCallbackCount) {
-
-    switch(consecutiveCallbackCount) {
-      case 0:
-        $scope.$apply(function() {
-          audioPrompt(true);
-          visualPrompt(true);
-        });
-        break;
-
-      case 1:
-        timer.stop();
-        $scope.goToTimeoutScreen();
-        break;
-
-      default:
-        // NO-OP
-        console.log("Warning: should not reach here");
+    else {
+      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
     }
   }
 
@@ -89,15 +75,15 @@ function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
 
   var currentIndex = 0;
   $scope.scenario = currentScenarioSet[currentIndex];
-  visualPrompt();
+  $scope.visualPrompt();
 
   var isFirstAttempt = true; // Boolean to help determine if the question was answered correctly on the first attempt.
   var correctCounter = 0; // Counter to keep track of correct answers and determine if >= 80% of the answers were correct.
   $scope.validateAnswer = function(answer) {
 
     // track user activity
-    if(timer) {
-      timer.nudge();
+    if($scope.timer) {
+      $scope.timer.nudge();
     }
 
     if(answer === currentScenarioSet[currentIndex].is_emergency) {
@@ -116,8 +102,8 @@ function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
     if(currentIndex < (currentScenarioSet.length - 1)) {
       currentIndex++; // This is in here to avoid potential "Index out of bounds", cause by fast clicking after the last scenario.
       $scope.scenario = currentScenarioSet[currentIndex];
-      audioPrompt();
-      visualPrompt();
+      $scope.audioPrompt();
+      $scope.visualPrompt();
       $scope.scores[currentIndex] = { 'state':'current' };
     } else if (currentIndex === (currentScenarioSet.length - 1)) {
       // Check if atleast 80% of the questions were answered correctly.
@@ -129,29 +115,8 @@ function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
     }
   };
 
-  function audioPrompt(isReprompt) {
-    // Add check for audio prompts
-    if($scope.currentPhase === "M1P1" || (isReprompt && $scope.currentPhase === "M1P2"))
-    {
-      if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
-      else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
-    }
-  }
-
-  function visualPrompt(isReprompt) {
-    // Add check for visual prompts
-    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2" || (isReprompt && $scope.currentPhase === "M1P3"))
-    {
-      if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
-      else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
-    }
-    else {
-      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
-    }
-  }
-
   if($scope.currentPhase === "M1P1") {
-    $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);
+    $scope.playAudio("IdentifyingEmergency1.mp3", null, $scope.audioPrompt);
   }
 
 
