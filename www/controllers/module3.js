@@ -4,6 +4,10 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
   // See after the constructor for rest of inheritance pattern
   BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
+  $scope.video = true;
+  $scope.dialpad = false;
+  $scope.calling = false;
+
   var currentUser = window.localStorage.getItem(STORAGE.CURRENT_USER);
 
   function transitionToCall() {
@@ -34,25 +38,21 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
     // console.log($scope.scenario);
   }
 
-  $scope.video   = true ;
-  $scope.dialpad = false;
-  $scope.calling = false;
-
 /*******/
 /* TTS */
 /*******/
 
   function TTS(stringToBeSpoken, onSuccess){
-	if(window.TTS) {
-	  window.TTS.speak(stringToBeSpoken, function () {
-	    console.log("TTS: " + stringToBeSpoken);
-	    if(onSuccess) { onSuccess(); }
-	  }, function (reason) {
-	    console.error("TTS FAILED: " + reason);
-	  });
-	} else {
-	  onSuccess();
-	}
+  	if(window.TTS) {
+  	  window.TTS.speak(stringToBeSpoken, function () {
+  	    console.log("TTS: " + stringToBeSpoken);
+  	    if(onSuccess) { onSuccess(); }
+  	  }, function (reason) {
+  	    console.error("TTS FAILED: " + reason);
+  	  });
+  	} else {
+  	  onSuccess();
+  	}
   }
 
 /*********************/
@@ -99,15 +99,15 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
 
   function voicePrompt(prompttype, filenameORprompttext, func) {
   	// Add check for audio prompts
-	if ($scope.currentPhase === "M3P1") {
-	  if(prompttype === promptType.AUDIO) {
-	  	$scope.playAudio(filenameORprompttext, null, func);
-	  } else if(prompttype === promptType.TTS) {
-	  	TTS(filenameORprompttext, func);
-	  }
-	} else {
-	  func();
-	}
+  	if ($scope.currentPhase === "M3P1") {
+  	  if(prompttype === promptType.AUDIO) {
+  	  	$scope.playAudio(filenameORprompttext, null, func);
+  	  } else if(prompttype === promptType.TTS) {
+  	  	TTS(filenameORprompttext, func);
+  	  }
+  	} else {
+  	  func();
+  	}
   }
 
 /****************/
@@ -116,19 +116,23 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
 
   function callLogic() {
 
-  	$scope.video   = false;
-    $scope.dialpad = false;
-    $scope.calling = true ;
+    $scope.$apply(function(){
+      $scope.video = false;
+      $scope.dialpad = false;
+      $scope.calling = true;
+    });
 
-	$scope.playAudio('Operator1.mp3', null, function() { // Now hold the phone to your ear
-	  $scope.playAudio('PhoneRinging.mp3', null, function() { // Ring ring
-	  	$scope.playAudio('Operator2.mp3', null, function() { // Do you need fire, ambulance or police?
-	  	  voicePrompt (promptType.AUDIO, $scope.scenario.type+'.mp3', function(){
-	  	  	voiceInput(voiceRecog1,errorCallback,Operator2);
-	  	  });
-	  	});
-	  });
-	});
+
+
+  	$scope.playAudio('Operator1.mp3', null, function() { // Now hold the phone to your ear
+  	  $scope.playAudio('PhoneRinging.mp3', null, function() { // Ring ring
+  	  	$scope.playAudio('Operator2.mp3', null, function() { // Do you need fire, ambulance or police?
+  	  	  voicePrompt (promptType.AUDIO, $scope.scenario.type+'.mp3', function(){
+  	  	  	voiceInput(voiceRecog1,errorCallback,Operator2);
+  	  	  });
+  	  	});
+  	  });
+  	});
 
     function voiceRecog1(result) {
       var recognizedText = result.results[0][0].transcript;
@@ -150,12 +154,11 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
       });
     }
 
-   function voiceInput2() {
+    function voiceInput2() {
       // TODO: voice recognition
       console.log("Do voice recog. here for the user's name");
       setTimeout(Operator3, 3000);
     }
-
 
 
     function Operator3() {
@@ -165,23 +168,20 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
     function voicePrompt3() {
       // Add check for audio prompts
       if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with value from localStorage
         TTS(currentUser.address, voiceInput3); // Addess of the current user
       } else {
         voiceInput3();
       }
     }
 
-   function voiceInput3() {
+    function voiceInput3() {
       // TODO: voice recognition
       console.log("Do voice recog. here for the user's address");
       setTimeout(Operator4, 3000);
     }
 
 
-
-
-   function Operator4() {
+    function Operator4() {
       $scope.playAudio('Operator5.mp3', null, voicePrompt4); // What is your situation?
     }
 
@@ -195,17 +195,14 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
       }
     }
 
-   function voiceInput4() {
+    function voiceInput4() {
       // TODO: voice recognition
       console.log("Do voice recog. here for the user's situation");
       setTimeout(Operator5, 3000);
     }
 
 
-
-
-
-   function Operator5() {
+    function Operator5() {
       $scope.playAudio('Operator6.mp3', null, voicePrompt5); // Are you safe?
     }
 
@@ -219,14 +216,11 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
       }
     }
 
-   function voiceInput5() {
+    function voiceInput5() {
       // TODO: voice recognition
       console.log("Do voice recog. here for if the user's safe or not");
       setTimeout(Operator6, 3000);
     }
-
-
-
 
 
     function Operator6() {
@@ -245,7 +239,6 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
     function levelUp() {
       $state.go('main.levelUp');
     }
-
   }
 
 };
