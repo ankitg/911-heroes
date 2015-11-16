@@ -25,6 +25,7 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 		'M1': 'main.module1',
 		'M2': 'main.module2',
 		'M3': 'main.module3',
+		'M4': 'main.module4',
 	};
 
 	var NavLocation = function (module, phase, state, stateParams) {
