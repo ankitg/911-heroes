@@ -15,7 +15,7 @@ angular.module('911-heroes.controllers', [])
 	  currentUser = JSON.parse(currentUser);
   	} else {
   	  currentUser = {
-  		"name":"The Nit Man",
+  		"name":"Nitin Malik",
   		"address":"257 Adelaide Street West"
   	  };
   	}
@@ -143,99 +143,52 @@ angular.module('911-heroes.controllers', [])
     }
 
 
-
     function Operator2() {
       $scope.playAudio('Operator3.mp3', null, function(){ // What is your name?
       	voicePrompt (promptType.TTS, currentUser.name.toString(), function(){ // Name of the current user
-	  	  	voiceInput2();
+	  	  	console.log("Do voice recog. here for the user's name");
+          setTimeout(Operator3, 3000);
 	  	  });
       });
     }
 
-    function voiceInput2() {
-      // TODO: voice recognition
-      console.log("Do voice recog. here for the user's name");
-      setTimeout(Operator3, 3000);
-    }
-
 
     function Operator3() {
-      $scope.playAudio('Operator4.mp3', null, voicePrompt3); // What is your address?
-    }
-
-    function voicePrompt3() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-        TTS(currentUser.address, voiceInput3); // Addess of the current user
-      } else {
-        voiceInput3();
-      }
-    }
-
-    function voiceInput3() {
-      // TODO: voice recognition
-      console.log("Do voice recog. here for the user's address");
-      setTimeout(Operator4, 3000);
+      $scope.playAudio('Operator4.mp3', null, function(){ // What is your address?
+        voicePrompt (promptType.TTS, currentUser.address, function(){ // Addess of the current user
+          console.log("Do voice recog. here for the user's address");
+          setTimeout(Operator4, 3000);
+        });
+      });
     }
 
 
     function Operator4() {
-      $scope.playAudio('Operator5.mp3', null, voicePrompt4); // What is your situation?
-    }
-
-    function voicePrompt4() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with ?
-        TTS("USER'S SITUATION", voiceInput4); // Situation of the current user
-      } else {
-        voiceInput4();
-      }
-    }
-
-    function voiceInput4() {
-      // TODO: voice recognition
-      console.log("Do voice recog. here for the user's situation");
-      setTimeout(Operator5, 3000);
+      $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
+        voicePrompt (promptType.TTS, "THE USER'S SITUTATION", function(){ // Situation of the current user
+          console.log("Do voice recog. here for the user's situation");
+          setTimeout(Operator5, 3000);
+        });
+      });
     }
 
 
     function Operator5() {
-      $scope.playAudio('Operator6.mp3', null, voicePrompt5); // Are you safe?
-    }
-
-    function voicePrompt5() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-        // TODO: replace hardcoded value with ?
-        TTS("Yes!", voiceInput5); // The user is always safe!
-      } else {
-        voiceInput5();
-      }
-    }
-
-    function voiceInput5() {
-      // TODO: voice recognition
-      console.log("Do voice recog. here for if the user's safe or not");
-      setTimeout(Operator6, 3000);
+      $scope.playAudio('Operator6.mp3', null, function(){ // Are you safe?
+        voicePrompt (promptType.TTS, "Yes!", function(){ // The user is always safe!
+          console.log("Do voice recog. here for if the user's safe or not");
+          setTimeout(Operator6, 3000);
+        });
+      });
     }
 
 
     function Operator6() {
-      $scope.playAudio('Operator7.mp3', null, voicePrompt6); // Don't hang up!
-    }
-
-    function voicePrompt6() {
-      // Add check for audio prompts
-      if($scope.currentPhase === "M3P1") {
-        $scope.playAudio("Operator8.mp3", null, levelUp);
-      } else {
-        levelUp();
-      }
-    }
-
-    function levelUp() {
-      $state.go('main.levelUp');
+      $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
+        voicePrompt (promptType.AUDIO, "Operator8.mp3", function(){
+          $state.go('main.levelUp');
+        });
+      });
     }
   }
 
