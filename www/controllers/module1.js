@@ -1,7 +1,32 @@
-angular.module('911-heroes.controllers', [])
 
-.controller('Module1Ctrl', function($scope, $state, SCENARIOS) {
+function Module1Ctrl($scope, $state, SCENARIOS, idleTimer) {
 
+  // See after the constructor for rest of inheritance pattern
+  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
+
+  // override
+  $scope.audioPrompt = function (isReprompt) {
+
+    // Add check for audio prompts
+    if($scope.currentPhase === "M1P1" || (isReprompt && $scope.currentPhase === "M1P2"))
+    {
+      if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
+      else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
+    }
+  }
+
+  // override
+  $scope.visualPrompt = function(isReprompt) {
+    // Add check for visual prompts
+    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2" || (isReprompt && $scope.currentPhase === "M1P3"))
+    {
+      if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
+      else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
+    }
+    else {
+      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
+    }
+  }
 
   var getNewScenarioSet = function() {
     var scenarios = SCENARIOS;
@@ -50,11 +75,17 @@ angular.module('911-heroes.controllers', [])
 
   var currentIndex = 0;
   $scope.scenario = currentScenarioSet[currentIndex];
-  visualPrompt();
+  $scope.visualPrompt();
 
   var isFirstAttempt = true; // Boolean to help determine if the question was answered correctly on the first attempt.
   var correctCounter = 0; // Counter to keep track of correct answers and determine if >= 80% of the answers were correct.
   $scope.validateAnswer = function(answer) {
+
+    // track user activity
+    if($scope.timer) {
+      $scope.timer.nudge();
+    }
+
     if(answer === currentScenarioSet[currentIndex].is_emergency) {
       if(isFirstAttempt) {
         $scope.scores[currentIndex] = { 'state':'pass' };
@@ -71,8 +102,8 @@ angular.module('911-heroes.controllers', [])
     if(currentIndex < (currentScenarioSet.length - 1)) {
       currentIndex++; // This is in here to avoid potential "Index out of bounds", cause by fast clicking after the last scenario.
       $scope.scenario = currentScenarioSet[currentIndex];
-      audioPrompt();
-      visualPrompt();
+      $scope.audioPrompt();
+      $scope.visualPrompt();
       $scope.scores[currentIndex] = { 'state':'current' };
     } else if (currentIndex === (currentScenarioSet.length - 1)) {
       // Check if atleast 80% of the questions were answered correctly.
@@ -84,29 +115,8 @@ angular.module('911-heroes.controllers', [])
     }
   };
 
-  function audioPrompt() {
-    // Add check for audio prompts
-    if($scope.currentPhase === "M1P1")
-    {
-      if($scope.scenario.is_emergency) { $scope.playAudio('IdentifyingEmergency2.mp3'); }
-      else { $scope.playAudio('IdentifyingEmergency3.mp3'); }
-    }
-  }
-
-  function visualPrompt() {
-    // Add check for visual prompts
-    if($scope.currentPhase === "M1P1" || $scope.currentPhase === "M1P2")
-    {
-      if($scope.scenario.is_emergency) { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_left; }
-      else { $scope.heroImgSrc = $scope.selectedAvatar.point_screen_right; }
-    }
-    else {
-      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
-    }
-  }
-
   if($scope.currentPhase === "M1P1") {
-    $scope.playAudio("IdentifyingEmergency1.mp3", null, audioPrompt);
+    $scope.playAudio("IdentifyingEmergency1.mp3", null, $scope.audioPrompt);
   }
 
 
@@ -143,4 +153,10 @@ angular.module('911-heroes.controllers', [])
     }
   ];
 
-});
+};
+
+Module1Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
+Module1Ctrl.prototype.constructor = Module1Ctrl;
+
+var controllers = angular.module('911-heroes.controllers', []);
+controllers.controller('Module1Ctrl', Module1Ctrl);

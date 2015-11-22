@@ -1,6 +1,8 @@
-angular.module('911-heroes.controllers', [])
 
-.controller('Module4Ctrl', function($scope, $state, SCENARIOS) {
+function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
+
+  // See after the constructor for rest of inheritance pattern
+  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
   //module 1
   function module1() {
@@ -186,4 +188,12 @@ angular.module('911-heroes.controllers', [])
     }
   }
 
-});
+};
+
+Module4Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
+Module4Ctrl.prototype.constructor = Module4Ctrl;
+
+
+var controllers = angular.module('911-heroes.controllers', []);
+controllers.controller('Module4Ctrl', Module4Ctrl);
+
