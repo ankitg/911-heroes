@@ -1,8 +1,6 @@
+angular.module('911-heroes.controllers', [])
 
-function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
-
-  // See after the constructor for rest of inheritance pattern
-  BaseModuleCtrl.call(this, $scope, $state, idleTimer);
+.controller('Module3Ctrl', function($scope, $state, SCENARIOS, STORAGE) {
 
   $scope.video = true;
   $scope.dialpad = false;
@@ -194,10 +192,4 @@ function Module3Ctrl($scope, $state, SCENARIOS, STORAGE, idleTimer) {
     }
   }
 
-};
-
-Module3Ctrl.prototype = Object.create(BaseModuleCtrl.prototype);
-Module3Ctrl.prototype.constructor = Module3Ctrl;
-
-var controllers = angular.module('911-heroes.controllers', []);
-controllers.controller('Module3Ctrl', Module3Ctrl);
+});
