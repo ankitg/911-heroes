@@ -7876,16 +7876,47 @@ input {
 .director-container {
   position: relative; }
 
-.director-img {
+.clapper-top {
   position: absolute;
-  left: 20%;
-  top: -14px; }
-  .director-img .has-error {
-    text-align: right; }
+  left: 31%;
+  top: 35px;
+  transform: rotate(-6deg);
+  transition: transform 500ms;
+  transform-origin: bottom left; }
+
+.clapper-bottom {
+  position: absolute;
+  left: 29%;
+  top: 35px; }
+
+.clapper-up {
+  transform: rotate(-40deg); }
+
+.clapper-down {
+  transform: rotate(0deg); }
+
+.display-none {
+  display: none; }
 
 .video-avatar {
   margin: 150px auto 0;
   display: block; }
+
+.clapper {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  padding: 4px 80px 4px 0;
+  background: #fff;
+  -webkit-transform-transform: rotate(160deg);
+  -ms-transform-transform: rotate(160deg);
+  transform: rotate(160deg);
+  -webkit-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  border-radius: 1px 0 0 1px; }
 
 .true-false-wrap {
   width: 240px;
