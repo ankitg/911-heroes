@@ -75,12 +75,12 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		var audio = document.getElementById(audioElementId);
 	    audio.src = "./audio/"+$scope.selectedAvatar.type+"/"+audioSrc; // Set audio source to (fe)male voice according to the selected avatar
 	    audio.load();
-		setTimeout(function(){audio.play();},0); // Doesn't work without the timeout ¯\_(ツ)_/¯
 		if(callback) {
 			audio.onended = function(){ callback(); };
 		} else {
 			audio.onended = function(){}; // Unset callback to avoid looping on chained playAudio events
 		}
+		setTimeout(function(){audio.play();},0); // Doesn't work without the timeout ¯\_(ツ)_/¯
 	};
 
 	// On start, navigate to a specific page
