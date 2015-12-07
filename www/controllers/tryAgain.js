@@ -7,6 +7,8 @@ controllers.controller('TryAgainCtrl', function($scope, stateService, $timeout) 
 
   var timeout = null;
 
+  $scope.playAudio("TryAgain.mp3");
+
   $scope.$on('$ionicView.enter', function() {
 
     timeout = $timeout(animatePracticeAgain, 1000);
