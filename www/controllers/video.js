@@ -3,6 +3,7 @@ var controllers = angular.module('911-heroes.controllers', []);
 controllers.controller('VideoCtrl', function($scope) {
 
   $scope.isContinueEnabled = false;
+  $scope.isClapperHidden = false;
 
   $scope.$on('$ionicView.leave', function() {
     stopVideo();
@@ -16,6 +17,8 @@ controllers.controller('VideoCtrl', function($scope) {
   };
 
   function clapperRemove() {
+
+    $scope.isClapperHidden = true;
     clapperTop.classList.add('display-none');
     clapperBottom.classList.add('display-none');
   };
@@ -63,6 +66,17 @@ controllers.controller('VideoCtrl', function($scope) {
       return;
     }
     playVideo();
+  };
+
+  $scope.rewatchVideo = function() {
+    video = document.getElementById('videoScreen');
+    if (!video || !$scope.isClapperHidden) {
+      return;
+    }
+
+    video.pause();
+    video.currentTime = 0;
+    video.play();
   };
 
   $scope.continue = function() {
