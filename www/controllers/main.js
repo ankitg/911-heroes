@@ -3,6 +3,11 @@ var controllers = angular.module('911-heroes.controllers', []);
 controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', function($scope, stateService, $state, avatarService) {
 
 	/**
+	 * Allows certain shortcuts during the development process. Turn this off for production!
+	 */
+	$scope.isDevMode = true;
+
+	/**
 	 * Convenience property for the current phase. Set during navigation.
 	 */
 	$scope.currentPhase = null;
