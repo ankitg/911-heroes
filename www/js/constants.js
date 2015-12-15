@@ -50,4 +50,10 @@ angular.module('911-heroes.constants', [])
         {'id':'37', 'src':'./img/emergencies/non-emergency/Non-Emergency 8.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
       ]
 	]
+)
+
+.constant('SOUNDS', {
+    'CORRECT':    'bell.mp3',
+    'INCORRECT':  'buzzer.mp3'
+  }
 );

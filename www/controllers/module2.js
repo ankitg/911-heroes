@@ -23,9 +23,11 @@ function Module2Ctrl($scope, $state, utilities, idleTimer) {
       keyToFlash = 'call';
     } else if ($scope.dialedNumber.length === 3 && $scope.dialedNumber === "911" && lastKeyPressed === "call") {
       utilities.clearFlashing();
+    } else {
+      // Key must have been incorrect
+      keyToFlash = 'bksp';
     }
 
-    // If keyToFlash exists, it means the correct key was pressed and we want to move onto the next key
     if(keyToFlash) {
       if($scope.currentPhase === "M2P1" || $scope.currentPhase === "M2P2" || (isReprompt && $scope.currentPhase === "M2P3")) {
         utilities.flash(keyToFlash);
