@@ -100,7 +100,12 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
       correctCounter++;
     }
 
-    $scope.playAudio(SOUNDS.CORRECT, null, continueAfterAnswer);
+    if($scope.currentPhase === "M1P3") {
+      // Using timeout here to avoid "scope in progress" error.
+      setTimeout(continueAfterAnswer, 0);
+    } else {
+      $scope.playAudio(SOUNDS.CORRECT, null, continueAfterAnswer);
+    }
   };
 
   function continueAfterAnswer() {
