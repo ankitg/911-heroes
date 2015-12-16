@@ -8012,6 +8012,9 @@ input {
   margin-left: -12px;
   margin-top: 4px; }
 
+.dialpad-call-button {
+  padding-right: 37px; }
+
 .dialpad-call {
   margin-top: 2px;
   margin-left: 10px; }
