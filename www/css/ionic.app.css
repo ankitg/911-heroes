@@ -7973,8 +7973,8 @@ input {
 
 .dialer-display {
   position: absolute;
-  top: 105px;
-  left: 114px;
+  top: 80px;
+  left: 90px;
   font-family: sans-serif;
   font-size: 25px;
   color: #fff;
@@ -8022,4 +8022,5 @@ input {
 
 .dialpad-backspace {
   padding-left: 35px;
-  margin-top: 2px; }
+  margin-top: -2px;
+  height: 66px; }
