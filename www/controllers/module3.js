@@ -69,12 +69,30 @@ angular.module('911-heroes.controllers', [])
     window.plugins.speechrecognizer.stop(successCallback, failureCallback);
   }
 
+  var vrResult = "";
+
   function resultCallback(result) {
-  	if(result && result.results) {console.log(result.results[0][0].transcript);}
+  	if(result && result.results) {
+      console.log(result.results[0][0].transcript);
+      vrResult = result.results[0][0].transcript;
+    }
   }
 
   function errorCallback(error) {
     console.error(error);
+    if(error.code === "5") {
+      console.log("ERROR NUMBER 5 Occured :(");
+      // HARD-CODING to voiceRecog1, as it's the only one.
+      if(vrResult.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
+        // We found what we were looking for in what you said!
+        console.log("\""+vrResult+"\" does contain \""+$scope.scenario.type+"\"");
+        Operator2();
+      } else {
+        console.log("NO CIGAR");
+        $state.go('main.tryAgain');
+      }
+
+    }
   }
 
   function voiceInput(success, failure, next) {
@@ -82,6 +100,7 @@ angular.module('911-heroes.controllers', [])
   	  startRecognition();
   	  setTimeout(function(){stopRecognition(success,failure);}, 3000);
   	} else {
+      console.log("voice recog not found.")
   	  next();
   	}
   }
@@ -138,8 +157,10 @@ angular.module('911-heroes.controllers', [])
       if(recognizedText.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
       	// We found what we were looking for in what you said!
       	console.log("\""+recognizedText+"\" does contain \""+$scope.scenario.type+"\"");
+        Operator2();
+      } else {
+        $state.go('main.tryAgain');
       }
-      Operator2();
     }
 
 
