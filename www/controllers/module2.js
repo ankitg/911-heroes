@@ -1,10 +1,19 @@
 
-function Module2Ctrl($scope, $state, utilities, idleTimer) {
+function Module2Ctrl($scope, $state, utilities, SOUNDS, idleTimer) {
 
   // See after the constructor for rest of inheritance pattern
   BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
   var lastKeyPressed = null;
+  var nextExpectedValue = null;
+
+  var keyToValueDict = {
+    'emergencyCall' : 'emergencyCall',
+    'nine': '9',
+    'one': '1',
+    'call': 'call',
+    'bksp': 'bksp'
+  };
 
 // override
   $scope.visualPrompt = function(isReprompt) {
@@ -29,6 +38,9 @@ function Module2Ctrl($scope, $state, utilities, idleTimer) {
     }
 
     if(keyToFlash) {
+
+      nextExpectedValue = keyToValueDict[keyToFlash];
+
       if($scope.currentPhase === "M2P1" || $scope.currentPhase === "M2P2" || (isReprompt && $scope.currentPhase === "M2P3")) {
         utilities.flash(keyToFlash);
       } else {
@@ -90,11 +102,31 @@ function Module2Ctrl($scope, $state, utilities, idleTimer) {
       $scope.dialedNumber += key;
     }
 
-    // Prompts
-    $scope.audioPrompt();
+    if($scope.currentPhase === "M2P3") {
+      setTimeout(continueAfterAnswer, 0);
+
+    } else {
+
+      // Play bell-buzzer
+      if(lastKeyPressed == nextExpectedValue) {
+        $scope.playAudio(SOUNDS.CORRECT, null, continueAfterAnswer);
+      } else {
+        $scope.playAudio(SOUNDS.INCORRECT, null, continueAfterAnswer);
+      }
+    }
+
     $scope.visualPrompt();
 
   };
+
+  function continueAfterAnswer() {
+    
+    // Prompts
+    $scope.$apply(function() {
+      $scope.audioPrompt();
+    });
+
+  }
 };
 
 
