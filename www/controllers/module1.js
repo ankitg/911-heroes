@@ -103,7 +103,11 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
     if($scope.currentPhase === "M1P3") {
       // Using timeout here to avoid "scope in progress" error.
       setTimeout(continueAfterAnswer, 0);
+
     } else {
+
+      $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
+
       $scope.playAudio(SOUNDS.CORRECT, null, continueAfterAnswer);
     }
   };
