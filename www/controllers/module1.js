@@ -4,6 +4,12 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
   // See after the constructor for rest of inheritance pattern
   BaseModuleCtrl.call(this, $scope, $state, idleTimer);
 
+  /**
+   * Is true if the user answered correctly and has not yet finished the transition to the next question.
+   * (May be waiting for the bell sound)
+   */
+  var isQuestionTransition = false;
+
   // override
   $scope.audioPrompt = function (isReprompt) {
 
@@ -86,6 +92,10 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
       $scope.timer.nudge();
     }
 
+    if(isQuestionTransition) {
+      return;
+    }
+
     // INCORRECT
     if(answer !== currentScenarioSet[currentIndex].is_emergency) {
       $scope.scores[currentIndex] = { 'state':'fail' };
@@ -106,6 +116,9 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
 
     } else {
 
+      isQuestionTransition = true;
+
+      // Put hands on hips during transition
       $scope.heroImgSrc = $scope.selectedAvatar.hands_on_hips;
 
       $scope.playAudio(SOUNDS.CORRECT, null, continueAfterAnswer);
@@ -114,6 +127,7 @@ function Module1Ctrl($scope, $state, SCENARIOS, SOUNDS, idleTimer) {
 
   function continueAfterAnswer() {
     isFirstAttempt = true;
+    isQuestionTransition = false;
     if(currentIndex < (currentScenarioSet.length - 1)) {
       currentIndex++; // This is in here to avoid potential "Index out of bounds", cause by fast clicking after the last scenario.
       $scope.scenario = currentScenarioSet[currentIndex];
