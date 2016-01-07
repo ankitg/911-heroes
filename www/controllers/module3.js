@@ -110,7 +110,7 @@ angular.module('911-heroes.controllers', [])
 
         function Operator4() {
           $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
-            voicePrompt (promptType.TTS, "THE USER'S SITUTATION", function(){ // Situation of the current user
+            voicePrompt (promptType.TTS, "I am fine.", function(){ // Situation of the current user
               console.log("Do voice recog. here for the user's situation");
               setTimeout(Operator5, 3000);
             });
@@ -235,7 +235,7 @@ angular.module('911-heroes.controllers', [])
 
     function Operator4() {
       $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
-        voicePrompt (promptType.TTS, "THE USER'S SITUTATION", function(){ // Situation of the current user
+        voicePrompt (promptType.TTS, "I am fine.", function(){ // Situation of the current user
           console.log("Do voice recog. here for the user's situation");
           setTimeout(Operator5, 3000);
         });
