@@ -220,7 +220,11 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
           });
         }
       }
+    } else {
+      console.log("NO CIGAR");
+      $state.go('main.tryAgain');
     }
+  }
 
   function voiceInput(success, failure, next) {
     if(window.plugins && window.plugins.speechrecognizer) {
