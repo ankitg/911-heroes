@@ -1,6 +1,6 @@
 var controllers = angular.module('911-heroes.controllers', []);
 
-controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', function($scope, stateService, $state, avatarService) {
+controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarService', '$ionicPlatform', function($scope, stateService, $state, avatarService, $ionicPlatform) {
 
 	/**
 	 * Allows certain shortcuts during the development process. Turn this off for production!
@@ -87,6 +87,10 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 		}
 		setTimeout(function(){audio.play();},0); // Doesn't work without the timeout ¯\_(ツ)_/¯
 	};
+
+	$ionicPlatform.registerBackButtonAction(function (event) {
+        event.preventDefault();
+    }, 100);
 
 	// On start, navigate to a specific page
 	goToLaunchLocation();
