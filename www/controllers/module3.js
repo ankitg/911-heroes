@@ -49,6 +49,7 @@ angular.module('911-heroes.controllers', [])
   	    console.error("TTS FAILED: " + reason);
   	  });
   	} else {
+      console.log("TTS plugin not found");
   	  onSuccess();
   	}
   }

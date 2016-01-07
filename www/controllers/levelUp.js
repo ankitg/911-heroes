@@ -27,7 +27,7 @@ controllers.controller('LevelUpCtrl', function($scope) {
   function goToNextWithDelay(delay) {
     var delayDuration;
     if(delay) { delayDuration = delay; }
-    else { delayDuration = 5000; }
+    else { delayDuration = 3000; }
 
     setTimeout($scope.goToNext, delayDuration);
   }
