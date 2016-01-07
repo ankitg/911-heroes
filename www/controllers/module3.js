@@ -87,6 +87,55 @@ angular.module('911-heroes.controllers', [])
         // We found what we were looking for in what you said!
         console.log("\""+vrResult+"\" does contain \""+$scope.scenario.type+"\"");
         Operator2();
+
+        function Operator2() {
+          $scope.playAudio('Operator3.mp3', null, function(){ // What is your name?
+            voicePrompt (promptType.TTS, currentUser.name.toString(), function(){ // Name of the current user
+              console.log("Do voice recog. here for the user's name");
+              setTimeout(Operator3, 3000);
+            });
+          });
+        }
+
+
+        function Operator3() {
+          $scope.playAudio('Operator4.mp3', null, function(){ // What is your address?
+            voicePrompt (promptType.TTS, currentUser.address, function(){ // Addess of the current user
+              console.log("Do voice recog. here for the user's address");
+              setTimeout(Operator4, 3000);
+            });
+          });
+        }
+
+
+        function Operator4() {
+          $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
+            voicePrompt (promptType.TTS, "THE USER'S SITUTATION", function(){ // Situation of the current user
+              console.log("Do voice recog. here for the user's situation");
+              setTimeout(Operator5, 3000);
+            });
+          });
+        }
+
+
+        function Operator5() {
+          $scope.playAudio('Operator6.mp3', null, function(){ // Are you safe?
+            voicePrompt (promptType.TTS, "Yes!", function(){ // The user is always safe!
+              console.log("Do voice recog. here for if the user's safe or not");
+              setTimeout(Operator6, 3000);
+            });
+          });
+        }
+
+
+        function Operator6() {
+          $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
+            voicePrompt (promptType.AUDIO, "Operator8.mp3", function(){
+              $state.go('main.levelUp');
+            });
+          });
+        }
+
       } else {
         console.log("NO CIGAR");
         $state.go('main.tryAgain');
@@ -100,8 +149,8 @@ angular.module('911-heroes.controllers', [])
   	  startRecognition();
   	  setTimeout(function(){stopRecognition(success,failure);}, 3000);
   	} else {
-      console.log("voice recog not found.")
-  	  next();
+      console.log("voice recog not found.");
+      setTimeout(function(){next();}, 3000);
   	}
   }
 

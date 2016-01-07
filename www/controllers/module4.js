@@ -171,13 +171,56 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
     window.plugins.speechrecognizer.stop(successCallback, failureCallback);
   }
 
+  var vrResult = "";
+
   function resultCallback(result) {
-    if(result && result.results) {console.log(result.results[0][0].transcript);}
+    if(result && result.results) {
+      console.log(result.results[0][0].transcript);
+      vrResult = result.results[0][0].transcript;
+    }
   }
 
   function errorCallback(error) {
     console.error(error);
-  }
+    if(error.code === "5") {
+      console.log("ERROR NUMBER 5 Occured :(");
+      // HARD-CODING to voiceRecog1, as it's the only one.
+      if(vrResult.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
+        // We found what we were looking for in what you said!
+        console.log("\""+vrResult+"\" does contain \""+$scope.scenario.type+"\"");
+        Operator2();
+
+        function Operator2() {
+          $scope.playAudio('Operator3.mp3', null, function(){ // What is your name?
+            setTimeout(Operator3, 3000);
+          });
+        }
+
+        function Operator3() {
+          $scope.playAudio('Operator4.mp3', null, function(){ // What is your address?
+            setTimeout(Operator4, 3000);
+          });
+        }
+
+        function Operator4() {
+          $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
+            setTimeout(Operator5, 3000);
+          });
+        }
+
+        function Operator5() {
+          $scope.playAudio('Operator6.mp3', null, function(){ // Are you safe?
+            setTimeout(Operator6, 3000);
+          });
+        }
+
+        function Operator6() {
+          $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
+            // $state.go('main.levelUp');
+          });
+        }
+      }
+    }
 
   function voiceInput(success, failure, next) {
     if(window.plugins && window.plugins.speechrecognizer) {

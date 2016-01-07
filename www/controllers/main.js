@@ -5,7 +5,7 @@ controllers.controller('MainCtrl', ['$scope', 'stateService', '$state', 'avatarS
 	/**
 	 * Allows certain shortcuts during the development process. Turn this off for production!
 	 */
-	$scope.isDevMode = true;
+	$scope.isDevMode = false;
 
 	/**
 	 * Convenience property for the current phase. Set during navigation.
