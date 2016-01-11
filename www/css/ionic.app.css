@@ -7882,7 +7882,7 @@ input {
 
 .clapper-top {
   position: absolute;
-  left: 31%;
+  left: 30.8%;
   top: 35px;
   transform: rotate(-6deg);
   transition: transform 500ms;
@@ -7904,7 +7904,9 @@ input {
 
 .video-avatar {
   margin: 150px auto 0;
-  display: block; }
+  display: block;
+  width: 158px;
+  height: 160px; }
 
 .clapper {
   width: 0;
@@ -7933,8 +7935,8 @@ input {
   margin: 0 auto; }
 
 .module1-avatar-wrap {
-  width: 138px;
-  height: 140px;
+  width: 158px;
+  height: 160px;
   margin: 10px auto; }
 
 .module1-avatar {
@@ -7962,7 +7964,7 @@ input {
 .svg-lets {
   width: 150px;
   display: block;
-  margin: 100px auto 25px; }
+  margin: 65px auto 25px; }
 
 .lock-screen {
   background-image: url('../img/lockscreen.png');
@@ -8046,3 +8048,10 @@ input {
   padding-left: 35px;
   margin-top: -2px;
   height: 66px; }
+
+.calling-screen {
+  background-image: url('../img/callingscreen.png');
+  background-size: cover;
+  height: 640px;
+  width: 360px;
+  position: relative; }

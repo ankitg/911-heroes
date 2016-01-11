@@ -10,7 +10,9 @@
 
       <img class="video-screen" ng-src="{{ scenario.src }}" alt="[Image] {{ scenario.alt }}" width="260" height="175">
 
-      <img class="module1-avatar" ng-src="{{ selectedAvatar.hands_on_hips }}" alt="[image] {{selectedAvatar.name}}" width="140" height="140">
+      <div class="module1-avatar-wrap">
+        <img class="module1-avatar" ng-src="{{ selectedAvatar.hands_on_hips }}" alt="[image] {{selectedAvatar.name}}">
+      </div>
     </div>
 
     <div ng-show="dialpad">
@@ -90,8 +92,8 @@
       </div>
     </div>
 
-    <div ng-show="calling">
-      <p class="dialer-display">Calling 911...</p>
+    <div ng-show="calling" class="calling-screen">
+      <!-- <p class="dialer-display">Calling 911...</p> -->
     </div>
 
     <audio id="audioClip"></audio>
