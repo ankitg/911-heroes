@@ -7752,7 +7752,7 @@ body, label, input, button {
 
 #login .login-container {
   width: 80%;
-  margin: 10% auto; }
+  margin: 6% auto; }
 #login .item-stacked-label input {
   background-color: transparent !important;
   border-bottom: 1px solid #8cacc0;
@@ -7865,7 +7865,11 @@ input {
 .video-screen {
   display: block;
   border: 3px solid white;
-  width: 260px;
+  width: 280px;
+  margin: 10% auto 5%;
+  padding: 10px; }
+
+.video-screen#videoScreen {
   margin: 15% auto 5%; }
 
 .grid-2 {
@@ -7928,16 +7932,23 @@ input {
   display: block;
   margin: 0 auto; }
 
+.module1-avatar-wrap {
+  width: 138px;
+  height: 140px;
+  margin: 10px auto; }
+
 .module1-avatar {
-  margin: 10px auto 15px;
-  display: block; }
+  display: block;
+  width: 100%;
+  height: 100%; }
 
 .svg-level-up {
   display: block;
-  margin: 30px auto; }
+  margin: 55px auto; }
 
 .levelUp-avatar {
   width: 250px;
+  height: 250px;
   display: block;
   margin: 30px auto; }
 
@@ -8004,19 +8015,27 @@ input {
   font-size: 42px;
   background-color: transparent;
   border: none;
-  padding-left: 25px;
-  padding-right: 70px;
+  margin-top: -1px;
+  padding-left: 33px;
+  padding-right: 63px;
+  padding-bottom: 2px;
   color: #fff; }
+
+.dialpad-digit-one {
+  margin-top: 1px;
+  padding-bottom: 1px; }
 
 .dialpad-star {
   margin-left: -12px;
   margin-top: 4px; }
 
 .dialpad-call-button {
+  margin-top: -3px;
+  padding-left: 25px;
   padding-right: 37px; }
 
 .dialpad-call {
-  margin-top: 2px;
+  margin-top: 7px;
   margin-left: 10px; }
 
 .dialpad-contacts {

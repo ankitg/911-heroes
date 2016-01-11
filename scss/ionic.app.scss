@@ -117,7 +117,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 	.login-container {
 		width: 80%;
-		margin: 10% auto;
+		margin: 6% auto;
 	}
 	.item-stacked-label input {
 		background-color: transparent !important;
@@ -261,7 +261,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .video-screen {
   display: block;
   border: 3px solid white;
-  width: 260px;
+  width: 280px;
+  margin: 10% auto 5%;
+  padding: 10px;
+}
+
+.video-screen#videoScreen {
   margin: 15% auto 5%;
 }
 .grid-2 {
@@ -338,19 +343,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   display: block;
   margin: 0 auto;
 }
+.module1-avatar-wrap {
+  width: 138px;
+  height: 140px;
+  margin: 10px auto;
+}
 .module1-avatar {
-  margin: 10px auto 15px;
   display: block;
+  width: 100%;
+  height: 100%;
 }
 
 //levelUp
 .svg-level-up {
   display: block;
-  margin: 30px auto;
+  margin: 55px auto;
 }
 //avatar-, -avatar
 .levelUp-avatar {
   width: 250px;
+  height: 250px;
   display: block;
   margin: 30px auto;
 }
@@ -432,9 +444,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-size: 42px;
   background-color: transparent;
   border: none;
-  padding-left: 25px;
-  padding-right: 70px;
+  margin-top: -1px;
+  padding-left: 33px;
+  padding-right: 63px;
+  padding-bottom: 2px;
   color: #fff;
+}
+  
+.dialpad-digit-one {
+  margin-top: 1px;
+  padding-bottom: 1px;
+
 }
 
 .dialpad-star {
@@ -443,11 +463,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .dialpad-call-button {
+  margin-top: -3px;
+  padding-left: 25px;
   padding-right: 37px;
 }
 
 .dialpad-call {
-  margin-top: 2px;
+  margin-top: 7px;
   margin-left: 10px;
 }
 

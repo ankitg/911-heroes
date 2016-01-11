@@ -13,7 +13,9 @@
       </div>
     </div>
 
-    <img class="module1-avatar" ng-src="{{ heroImgSrc }}" alt="[image] {{selectedAvatar.name}}" width="120">
+    <div class="module1-avatar-wrap">
+      <img class="module1-avatar" ng-src="{{ heroImgSrc }}" alt="[image] {{selectedAvatar.name}}">
+    </div>
 
     <div style="margin-left: 25px;">
       <div ng-repeat="score in scores" ng-switch on="score.state" style="display: inline-block;
