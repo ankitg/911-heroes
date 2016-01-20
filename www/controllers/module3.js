@@ -81,8 +81,8 @@ angular.module('911-heroes.controllers', [])
 
   function errorCallback(error) {
     console.error(error);
-    if(error.code === "5") {
-      console.log("ERROR NUMBER 5 Occured :(");
+    if(error.code === "5" || error.code === "7") {
+      console.log("ERROR NUMBER 5 OR 7 Occured :(");
       // HARD-CODING to voiceRecog1, as it's the only one.
       if(vrResult.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
         // We found what we were looking for in what you said!
@@ -98,7 +98,6 @@ angular.module('911-heroes.controllers', [])
           });
         }
 
-
         function Operator3() {
           $scope.playAudio('Operator4.mp3', null, function(){ // What is your address?
             voicePrompt (promptType.TTS, currentUser.address, function(){ // Addess of the current user
@@ -107,7 +106,6 @@ angular.module('911-heroes.controllers', [])
             });
           });
         }
-
 
         function Operator4() {
           $scope.playAudio('Operator5.mp3', null, function(){ // What is your situation?
@@ -118,7 +116,6 @@ angular.module('911-heroes.controllers', [])
           });
         }
 
-
         function Operator5() {
           $scope.playAudio('Operator6.mp3', null, function(){ // Are you safe?
             voicePrompt (promptType.TTS, "Yes!", function(){ // The user is always safe!
@@ -127,7 +124,6 @@ angular.module('911-heroes.controllers', [])
             });
           });
         }
-
 
         function Operator6() {
           $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
@@ -141,7 +137,6 @@ angular.module('911-heroes.controllers', [])
         console.log("NO CIGAR");
         $state.go('main.tryAgain');
       }
-
     }
   }
 
