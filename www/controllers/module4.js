@@ -134,7 +134,7 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
 
     function Operator6() {
       $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
-        $state.go('main.levelUp');
+        $state.go('main.final');
       });
     }
 
@@ -218,7 +218,7 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
 
         function Operator6() {
           $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
-            $state.go('main.levelUp');
+            $state.go('main.final');
           });
         }
       }

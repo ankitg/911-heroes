@@ -7,25 +7,25 @@
       <form name="loginForm" ng-submit="submitForm(loginForm.$valid)" class="list" novalidate>
   			<label class="item item-input item-stacked-label">
   				<span class="input-label">Name <i class="asterisk"></i></span>
-  				<input name="name" type="text" placeholder="First Last" ng-model="name" required>
+  				<input name="name" type="text" ng-model="name" required>
   			</label>
         <p class="has-error" ng-show="(loginForm.name.$invalid && submitted)">Name is required</p>
 
   			<label class="item item-input item-stacked-label">
   				<span class="input-label">Street # <i class="asterisk"></i></span>
-  				<input type="text" name="street_num" placeholder="123" ng-model="street_num" required>
+  				<input type="text" name="street_num" ng-model="street_num" required>
   			</label>
         <p class="has-error" ng-show="(loginForm.street_num.$invalid && submitted)">Street # is required</p>
 
         <label class="item item-input item-stacked-label">
   				<span class="input-label">Street Name <i class="asterisk"></i></span>
-  				<input type="text" name="street_name" placeholder="Adelaide Street" ng-model="street_name" required>
+  				<input type="text" name="street_name" ng-model="street_name" required>
   			</label>
         <p class="has-error" ng-show="(loginForm.street_name.$invalid && submitted)">Street Name is required</p>
 
         <label class="item item-input item-stacked-label">
   				<span class="input-label">Unit #</span>
-  				<input type="text" placeholder="101">
+  				<input type="text">
   			</label>
 
         <div class="login-footnote"><i class="asterisk"></i> Mandatory</div>

@@ -7865,12 +7865,15 @@ input {
 .video-screen {
   display: block;
   border: 3px solid white;
-  width: 280px;
+  width: 286px;
+  height: 201px;
   margin: 10% auto 5%;
-  padding: 10px; }
+  padding: 10px;
+  box-sizing: border-box; }
 
 .video-screen#videoScreen {
-  margin: 15% auto 5%; }
+  margin: 15% auto 5%;
+  height: 173px; }
 
 .grid-2 {
   width: 50%;
@@ -7935,8 +7938,8 @@ input {
   margin: 0 auto; }
 
 .module1-avatar-wrap {
-  width: 158px;
-  height: 160px;
+  width: 123px;
+  height: 125px;
   margin: 10px auto; }
 
 .module1-avatar {
@@ -7969,7 +7972,7 @@ input {
 .lock-screen {
   background-image: url('../img/lockscreen.png');
   background-size: cover;
-  height: 640px;
+  height: 620px;
   width: 360px;
   position: relative; }
 
@@ -8041,7 +8044,7 @@ input {
   margin-left: 10px; }
 
 .dialpad-contacts {
-  margin-left: 10px;
+  margin-left: 2px;
   margin-top: 6px; }
 
 .dialpad-backspace {
@@ -8052,6 +8055,13 @@ input {
 .calling-screen {
   background-image: url('../img/callingscreen.png');
   background-size: cover;
-  height: 640px;
+  height: 620px;
+  width: 360px;
+  position: relative; }
+
+.congratulations {
+  background-image: url('../img/congratulations.png');
+  background-size: cover;
+  height: 615px;
   width: 360px;
   position: relative; }

@@ -17,7 +17,7 @@ angular.module('911-heroes.constants', [])
       ],
 
       [
-        {'id':'10', 'src':'./img/emergencies/ambulance/photo/ambulance1_x2.jpg', 'alt':'An ambulance emegency.', 'type':'Ambulance', 'is_emergency':true},
+        {'id':'10', 'src':'./img/emergencies/ambulance/photo/ambulance1_x1.jpg', 'alt':'An ambulance emegency.', 'type':'Ambulance', 'is_emergency':true},
         {'id':'11', 'src':'./img/emergencies/ambulance/photo/ambulance2_x1.jpg', 'alt':'An ambulance emegency.', 'type':'Ambulance', 'is_emergency':true},
         {'id':'12', 'src':'./img/emergencies/ambulance/photo/ambulance3_x3.jpg', 'alt':'An ambulance emegency.', 'type':'Ambulance', 'is_emergency':true},
         {'id':'13', 'src':'./img/emergencies/ambulance/photo/ambulance4_x3.jpg', 'alt':'An ambulance emegency.', 'type':'Ambulance', 'is_emergency':true},
@@ -37,17 +37,18 @@ angular.module('911-heroes.constants', [])
         {'id':'25', 'src':'./img/emergencies/police/photo/police6_x2.jpg', 'alt':'A police emergency.', 'type':'Police', 'is_emergency':true},
         {'id':'26', 'src':'./img/emergencies/police/photo/police7_x3.jpg', 'alt':'A police emergency.', 'type':'Police', 'is_emergency':true},
         {'id':'27', 'src':'./img/emergencies/police/photo/police8_x3.jpg', 'alt':'A police emergency.', 'type':'Police', 'is_emergency':true},
+        {'id':'28', 'src':'./img/emergencies/police/photo/police9_x2.jpg', 'alt':'A police emergency.', 'type':'Police', 'is_emergency':true},
       ],
 
       [
-        {'id':'30', 'src':'./img/emergencies/non-emergency/Non-Emergency 1.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'31', 'src':'./img/emergencies/non-emergency/Non-Emergency 2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'32', 'src':'./img/emergencies/non-emergency/Non-Emergency 3.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'33', 'src':'./img/emergencies/non-emergency/Non-Emergency 4.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'34', 'src':'./img/emergencies/non-emergency/Non-Emergency 5.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'35', 'src':'./img/emergencies/non-emergency/Non-Emergency 6.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'36', 'src':'./img/emergencies/non-emergency/Non-Emergency 7.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
-        {'id':'37', 'src':'./img/emergencies/non-emergency/Non-Emergency 8.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'30', 'src':'./img/emergencies/non-emergency/nonEmergency1_x2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'31', 'src':'./img/emergencies/non-emergency/nonEmergency2_x2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'32', 'src':'./img/emergencies/non-emergency/nonEmergency3_x1.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'33', 'src':'./img/emergencies/non-emergency/nonEmergency4_x2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'34', 'src':'./img/emergencies/non-emergency/nonEmergency5_x1.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'35', 'src':'./img/emergencies/non-emergency/nonEmergency6_x1.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'36', 'src':'./img/emergencies/non-emergency/nonEmergency7_x2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
+        {'id':'37', 'src':'./img/emergencies/non-emergency/nonEmergency8_x2.jpg', 'alt':'Not an emergency.', 'type':'None', 'is_emergency':false},
       ]
 	]
 )
