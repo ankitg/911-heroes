@@ -2,7 +2,9 @@ angular.module('911-heroes.controllers', [])
 
 .controller('FinalCtrl', function($scope) {
 
-  $scope.playAudio("FinalCongratulations.mp3");
 
+    $scope.$on('$ionicView.enter', function() {
+      $scope.playAudio("FinalCongratulations.mp3");
+    });
 });
 
