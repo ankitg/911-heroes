@@ -1,10 +1,23 @@
-angular.module('911-heroes.controllers', [])
+var controllers = angular.module('911-heroes.controllers', [])
 
-.controller('FinalCtrl', function($scope) {
+controllers.controller('FinalCtrl', function($scope) {
 
+  $scope.$on('$ionicView.enter', function() {
+    $scope.playAudio("FinalCongratulations.mp3");
 
-    $scope.$on('$ionicView.enter', function() {
-      $scope.playAudio("FinalCongratulations.mp3");
+    setTimeout(showRestartButton, 5000);
+  });
+
+  $scope.isRestartVisible = false;
+
+  function showRestartButton() {
+    $scope.$apply(function() {
+      $scope.isRestartVisible = true;
     });
+  }
+
+  $scope.onRestartButtonClicked = function() {
+    $scope.restart();
+  }
 });
 
