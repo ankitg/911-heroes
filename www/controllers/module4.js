@@ -1,5 +1,5 @@
 
-function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
+function Module4Ctrl($scope, $state, idleTimer, SCENARIOS, SOUNDS) {
 
   // See after the constructor for rest of inheritance pattern
   BaseModuleCtrl.call(this, $scope, $state, idleTimer);
@@ -24,7 +24,8 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
     if(answer === $scope.scenario.is_emergency && $scope.scenario.is_emergency) {
       module2();
     } else if (answer === $scope.scenario.is_emergency && $scope.scenario.is_emergency === false) {
-      // TODO: NITIN ADD "CORRECT" DING HERE.
+      $scope.playAudio(SOUNDS.CORRECT);
+      chooseScenario();
     } else {
       module1();
     }
@@ -134,7 +135,7 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
 
     function Operator6() {
       $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
-        $state.go('main.final');
+        $scope.goToNext();
       });
     }
 
@@ -185,7 +186,7 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
   function errorCallback(error) {
     console.error(error);
     if(error.code === "5" || error.code === "7" ) {
-      console.log("ERROR NUMBER 5 OR 7 Occured :(");
+      console.log("ERROR NUMBER 5 OR 7 Occurred :(");
       // HARD-CODING to voiceRecog1, as it's the only one.
       if(vrResult.toLowerCase().indexOf($scope.scenario.type.toLowerCase()) !== -1) {
         // We found what we were looking for in what you said!
@@ -218,7 +219,7 @@ function Module4Ctrl($scope, $state, idleTimer, SCENARIOS) {
 
         function Operator6() {
           $scope.playAudio('Operator7.mp3', null, function(){ // Don't hang up!
-            $state.go('main.final');
+            $scope.goToNext();
           });
         }
       }

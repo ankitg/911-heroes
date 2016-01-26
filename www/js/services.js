@@ -3,7 +3,7 @@ var serviceModule = angular.module('911-heroes.services', []);
 serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 
 	// Order of Modules
-	var modules = ['Pre', 'Vid', 'M1', 'M2', 'M3', 'M4'];
+	var modules = ['Pre', 'Vid', 'M1', 'M2', 'M3', 'M4', 'Fin'];
 
 	// Order of Phases for each module
 	var phases = {
@@ -13,12 +13,14 @@ serviceModule.factory('stateService', ['STORAGE', function(STORAGE){
 		'M2': ['M2P1', 'M2P2', 'M2P3'],
 		'M3': ['M3P1', 'M3P2'],
 		'M4': ['M4P1'],
+		'Fin': ['final'],
 	};
 
 	var phaseToStateMap = {
 		'avatar': 'main.avatar',
 		'start': 'main.start',
 		'video': 'main.video',
+		'final': 'main.final'
 	};
 
 	var moduleToStateMap = {
